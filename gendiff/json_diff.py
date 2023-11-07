@@ -1,5 +1,5 @@
-def json_diff(file1, file2):
-    all_keys = sorted(set(file1 | file2))
+def get_json_diff(file1, file2):
+    all_keys = sorted(file1 | file2)
     result_dict = {}
     for key in all_keys:
         if file1.get(key) == file2.get(key):
