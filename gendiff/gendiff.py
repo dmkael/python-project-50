@@ -1,15 +1,12 @@
-import json
-from gendiff.json_diff import get_json_diff
+from gendiff.files_loader import load_files
+from gendiff.dict_comparer import compare_dicts
 
 
 def generate_diff(file1, file2):
-    if file1.endswith(".json") and file2.endswith(".json"):
-        file1 = json.load(open(file1))
-        file2 = json.load(open(file2))
-        result = dict_to_str(get_json_diff(file1, file2))
-        return result
-    else:
-        return "in development"
+    file1, file2 = load_files(file1, file2)
+    if not file1 and not file2:
+        return "Files types are different or file(s) are empty"
+    return dict_to_str(compare_dicts(file1, file2))
 
 
 def dict_to_str(input_dict):

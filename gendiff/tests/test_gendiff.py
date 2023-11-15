@@ -24,5 +24,15 @@ def test_gendiff():
   - timeout: 50
   + timeout: 0
 }"""
-    assert generate_diff("gendiff/tests/fixtures/file1.json",
-                         "gendiff/tests/fixtures/file4.txt") == "in development"
+    assert (generate_diff("gendiff/tests/fixtures/file1.json",
+                          "gendiff/tests/fixtures/file4.txt")
+            == "Files types are different or file(s) are empty")
+    assert generate_diff("gendiff/tests/fixtures/example1.yaml",
+                         "gendiff/tests/fixtures/example2.yml") == """{
+  - follow: false
+    host: hexlet.io
+  - proxy: 123.234.53.22
+  - timeout: 50
+  + timeout: 20
+  + verbose: true
+}"""
