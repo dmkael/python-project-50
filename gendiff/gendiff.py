@@ -11,12 +11,11 @@ def generate_diff(file1, file2):
 
 def dict_to_str(input_dict):
     result_str = "{"
-    if input_dict:
-        for key in input_dict:
-            if input_dict[key] is True:
-                input_dict[key] = 'true'
-            if input_dict[key] is False:
-                input_dict[key] = 'false'
-            result_str += f"\n{key}: {input_dict[key]}"
+    for key in input_dict:
+        if input_dict[key] is True:
+            input_dict[key] = 'true'
+        if input_dict[key] is False:
+            input_dict[key] = 'false'
+        result_str += f"\n{key}: {input_dict[key]}"
     result_str = result_str + "\n}"
     return result_str
