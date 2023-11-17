@@ -1,21 +1,28 @@
-from gendiff.files_loader import load_files
-from gendiff.dict_comparer import compare_dicts
+from gendiff.file_loader import load_files
+from gendiff.diff_builder import build_diff
 
 
-def generate_diff(file1, file2):
+def stylish(data, replacer=" ", space_counter=1):
+    replacer = replacer * space_counter
+
+    def walk(current_value, depth):
+        if not isinstance(current_value, dict):
+            return str(current_value)
+        result = "{\n"
+        for key in current_value:
+            str_key = f"{replacer * (depth + 1)}{str(key)}"
+            str_value = f"{walk(current_value[key], (depth + 1))}\n"
+            result += f"{str_key}: {str_value}"
+        return result + f"{replacer * depth}" + "}"
+
+    return walk(data, 0)
+
+
+def generate_diff(file1, file2, formatter=stylish):
     file1, file2 = load_files(file1, file2)
     if not file1 and not file2:
         return "Files types are different or file(s) are empty"
-    return dict_to_str(compare_dicts(file1, file2))
+    return formatter(build_diff(file1, file2))
 
 
-def dict_to_str(input_dict):
-    result_str = "{"
-    for key in input_dict:
-        if input_dict[key] is True:
-            input_dict[key] = 'true'
-        if input_dict[key] is False:
-            input_dict[key] = 'false'
-        result_str += f"\n{key}: {input_dict[key]}"
-    result_str = result_str + "\n}"
-    return result_str
+# print(generate_diff("tests/fixtures/file1.json", "tests/fixtures/file2.json"))
