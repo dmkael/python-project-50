@@ -1,21 +1,19 @@
-def value_stub():
-    return
-
-
 def build_diff(dict1, dict2):
-    result_dict = {}
-    default_value = value_stub
-    for key in sorted(dict1.keys() | dict2.keys()):
-        value1 = dict1.get(key, default_value)
-        value2 = dict2.get(key, default_value)
-        if value1 == value2:
-            result_dict[f"  {key}"] = value1
+    diff = {}
+    sorted_keys = sorted(dict1.keys() | dict2.keys())
+    for key in sorted_keys:
+        value1 = dict1.get(key)
+        value2 = dict2.get(key)
+        if isinstance(value1, dict) and isinstance(value2, dict):
+            diff[key] = build_diff(value1, value2)
         else:
-            if isinstance(value1, dict) and isinstance(value2, dict):
-                result_dict[key] = build_diff(value1, value2)
+            if key not in dict2:
+                diff[f"-rem#{key}"] = value1
+            elif key not in dict1:
+                diff[f"+add#{key}"] = value2
+            elif value1 == dict2.get(key):
+                diff[f"=eql#{key}"] = value1
             else:
-                if value1 is not default_value:
-                    result_dict[f"- {key}"] = value1
-                if value2 is not default_value:
-                    result_dict[f"+ {key}"] = value2
-    return result_dict
+                diff[f"-mod#{key}"] = value1
+                diff[f"+mod#{key}"] = value2
+    return diff
