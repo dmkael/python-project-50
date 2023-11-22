@@ -1,4 +1,5 @@
 from gendiff.gendiff import generate_diff
+from gendiff.diff_formatters import stylish
 
 
 def test_gendiff_json():
@@ -8,11 +9,11 @@ def test_gendiff_json():
     result1 = "gendiff/tests/fixtures/result1_json.txt"
     with open(result1, "r") as txt:
         result = txt.read()
-        assert generate_diff(json_file1, json_file2) == result
+        assert generate_diff(json_file1, json_file2, stylish) == result
     result2 = "gendiff/tests/fixtures/result2_json.txt"
     with open(result2, 'r') as txt:
         result = txt.read()
-        assert generate_diff(json_file1, json_file3) == result
+        assert generate_diff(json_file1, json_file3, stylish) == result
 
 
 def test_gendiff_yaml():
@@ -21,4 +22,4 @@ def test_gendiff_yaml():
     result1 = "gendiff/tests/fixtures/result1_yaml.txt"
     with open(result1, "r") as txt:
         result = txt.read()
-        assert generate_diff(yaml_file1, yaml_file2) == result
+        assert generate_diff(yaml_file1, yaml_file2, stylish) == result
