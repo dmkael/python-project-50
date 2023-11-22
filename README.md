@@ -7,3 +7,4 @@
 [![asciicast](https://asciinema.org/a/PshOkWehgOr68Vkh3EUrPVh58.svg)](https://asciinema.org/a/PshOkWehgOr68Vkh3EUrPVh58)
 [![asciicast](https://asciinema.org/a/Fl5anMYxcsZxdkeFrXmlnCv6O.svg)](https://asciinema.org/a/Fl5anMYxcsZxdkeFrXmlnCv6O)
 [![asciicast](https://asciinema.org/a/jyqq8q6kX0ps1Bgl60DKtFvzD.svg)](https://asciinema.org/a/jyqq8q6kX0ps1Bgl60DKtFvzD)
+[![asciicast](https://asciinema.org/a/CqtkTNv97aTkCSp1LGl7BqA93.svg)](https://asciinema.org/a/CqtkTNv97aTkCSp1LGl7BqA93)
