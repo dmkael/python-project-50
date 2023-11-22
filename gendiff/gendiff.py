@@ -41,5 +41,5 @@ def build_diff(dict1, dict2):
 def generate_diff(file1, file2, formatter):
     file1, file2 = load_files(file1, file2)
     if not file1 and not file2:
-        return "Files extensions are different or file(s) are empty"
+        return None
     return formatter(build_diff(file1, file2))
