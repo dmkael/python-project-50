@@ -1,4 +1,5 @@
 from gendiff.diff_formatters.value_check import is_touched_key
+from gendiff.diff_formatters.stringify_consts import format_consts_to_str
 
 
 def format_stylish_key(key):
@@ -12,6 +13,8 @@ def format_stylish_key(key):
 
 
 def stylish(data, replacer=" ", quantity=4):
+    data = format_consts_to_str(data)
+
     def walk(current_value, depth):
         if not isinstance(current_value, dict):
             return str(current_value)

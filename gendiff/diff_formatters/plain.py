@@ -1,4 +1,5 @@
 from gendiff.diff_formatters.value_check import is_touched_key
+from gendiff.diff_formatters.stringify_consts import format_consts_to_str
 
 CONST_LIST = ['true', 'false', 'null']
 
@@ -22,6 +23,7 @@ def build_plain_line(key, value, current_path):
 
 
 def plain(diff):
+    diff = format_consts_to_str(diff)
 
     def walk(data, keypath):
         result = ''
