@@ -36,4 +36,4 @@ def plain(diff):
                     result += str_line
         return result
 
-    return walk(diff, [])
+    return walk(diff, []).rstrip()
