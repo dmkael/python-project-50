@@ -1,5 +1,4 @@
 from gendiff.gendiff import generate_diff
-from gendiff.diff_formatters import make_stylish, make_plain, make_json
 import json
 
 
@@ -10,11 +9,11 @@ def test_gendiff_json_to_stylish():
     result1 = "gendiff/tests/fixtures/result1_stylish.txt"
     with open(result1, "r") as txt:
         result = txt.read()
-        assert generate_diff(json_file1, json_file2, make_stylish) == result
+        assert generate_diff(json_file1, json_file2, 'stylish') == result
     result2 = "gendiff/tests/fixtures/result2_stylish.txt"
     with open(result2, 'r') as txt:
         result = txt.read()
-        assert generate_diff(json_file1, json_file3, make_stylish) == result
+        assert generate_diff(json_file1, json_file3, 'stylish') == result
 
 
 def test_gendiff_yaml_to_stylish():
@@ -23,7 +22,7 @@ def test_gendiff_yaml_to_stylish():
     result1 = "gendiff/tests/fixtures/result1_stylish.txt"
     with open(result1, "r") as txt:
         result = txt.read()
-        assert generate_diff(yaml_file1, yaml_file2, make_stylish) == result
+        assert generate_diff(yaml_file1, yaml_file2, 'stylish') == result
 
 
 def test_gendiff_json_to_plain():
@@ -33,11 +32,11 @@ def test_gendiff_json_to_plain():
     result1 = "gendiff/tests/fixtures/result1_plain.txt"
     with open(result1, "r") as txt:
         result = txt.read()
-        assert generate_diff(json_file1, json_file2, make_plain) == result
+        assert generate_diff(json_file1, json_file2, 'plain') == result
     result2 = "gendiff/tests/fixtures/result2_plain.txt"
     with open(result2, 'r') as txt:
         result = txt.read()
-        assert generate_diff(json_file1, json_file3, make_plain) == result
+        assert generate_diff(json_file1, json_file3, 'plain') == result
 
 
 def test_gendiff_yaml_to_plain():
@@ -46,12 +45,12 @@ def test_gendiff_yaml_to_plain():
     result1 = "gendiff/tests/fixtures/result1_plain.txt"
     with open(result1, "r") as txt:
         result = txt.read()
-        assert generate_diff(yaml_file1, yaml_file2, make_plain) == result
+        assert generate_diff(yaml_file1, yaml_file2, 'plain') == result
 
 
 def test_gendiff_json_to_json():
     json_file1 = "gendiff/tests/fixtures/file1.json"
     json_file2 = "gendiff/tests/fixtures/file2.json"
-    diff = generate_diff(json_file1, json_file2, make_json)
+    diff = generate_diff(json_file1, json_file2, 'json')
     result1 = json.load(open("gendiff/tests/fixtures/result1.json"))
     assert json.loads(diff) == result1

@@ -1,5 +1,14 @@
 from gendiff.file_loader import load_file
-from gendiff.diff_formatters.to_stylish import make_stylish
+from gendiff.diff_formatters import make_stylish, make_plain, make_json
+
+
+def get_formatter(user_input):
+    if user_input == 'plain':
+        return make_plain
+    if user_input == 'stylish':
+        return make_stylish
+    if user_input == 'json':
+        return make_json
 
 
 def build_diff(dict1, dict2):
@@ -23,8 +32,9 @@ def build_diff(dict1, dict2):
     return diff
 
 
-def generate_diff(file1, file2, format_dict=make_stylish):
+def generate_diff(file1, file2, format_dict='stylish'):
     file1 = load_file(file1)
     file2 = load_file(file2)
+    current_formatter = get_formatter(format_dict)
     if file1 and file2:
-        return format_dict(build_diff(file1, file2))
+        return current_formatter(build_diff(file1, file2))
