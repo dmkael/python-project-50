@@ -9,6 +9,20 @@ def get_formatter(user_input):
         return make_stylish
     if user_input == 'json':
         return make_json
+    return "Wrong formatter parameter"
+
+
+def check_inputs(file1, file2, formatter):
+    error_message = []
+    if type(file1) is str:
+        error_message += [file1]
+    if type(file2) is str:
+        error_message += [file2]
+    if formatter == "Wrong formatter parameter":
+        error_message += [formatter]
+    if error_message:
+        return False, "\n".join(error_message)
+    return True, "Correct"
 
 
 def build_diff(dict1, dict2):
@@ -32,9 +46,11 @@ def build_diff(dict1, dict2):
     return diff
 
 
-def generate_diff(file1, file2, format_dict='stylish'):
+def generate_diff(file1, file2, format_type='stylish'):
     file1 = load_file(file1)
     file2 = load_file(file2)
-    current_formatter = get_formatter(format_dict)
-    if file1 and file2:
-        return current_formatter(build_diff(file1, file2))
+    formatter = get_formatter(format_type)
+    valid_input, error_message = check_inputs(file1, file2, formatter)
+    if valid_input:
+        return formatter(build_diff(file1, file2))
+    return error_message

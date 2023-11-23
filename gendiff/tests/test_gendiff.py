@@ -54,3 +54,10 @@ def test_gendiff_json_to_json():
     diff = generate_diff(json_file1, json_file2, 'json')
     result1 = json.load(open("gendiff/tests/fixtures/result1.json"))
     assert json.loads(diff) == result1
+
+
+def test_file_loader():
+    file1 = "gendiff/tests/fixtures/file1.json"
+    file2 = "gendiff/tests/fixtures/file4.doc"
+    diff = generate_diff(file1, file2)
+    assert diff == "'.doc' is not supported file type"
