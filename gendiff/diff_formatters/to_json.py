@@ -1,7 +1,7 @@
 import json
 
 
-def make_json(diff):
+def json_output(diff):
     result = json.dumps(diff, indent=4)
     result = result.replace("+add#", 'added >> ')
     result = result.replace("-rem#", 'removed >> ')

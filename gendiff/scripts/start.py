@@ -1,15 +1,15 @@
 import argparse
 from gendiff.gendiff import generate_diff
-from gendiff.diff_formatters import make_stylish, make_plain, make_json
+from gendiff.diff_formatters import stylish, plain, json_output
 
 
 def get_formatter(user_input):
     if user_input == 'plain':
-        return make_plain
+        return plain
     if user_input == 'stylish':
-        return make_stylish
+        return stylish
     if user_input == 'json':
-        return make_json
+        return json_output
 
 
 def main():
