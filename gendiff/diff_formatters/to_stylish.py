@@ -12,7 +12,7 @@ def format_stylish_key(key):
         return "- " + original_key
 
 
-def stylish(data, replacer=" ", quantity=4):
+def make_stylish(data, replacer=" ", quantity=4):
     data = format_consts_to_str(data)
 
     def walk(current_value, depth):

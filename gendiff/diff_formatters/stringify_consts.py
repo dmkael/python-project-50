@@ -1,15 +1,11 @@
-CONST_DICT = {
-    True: 'true',
-    False: 'false',
-    None: 'null'
-}
-
-
 def format_consts_to_str(diff_dict):
     for key in diff_dict:
-        if isinstance(diff_dict[key], dict):
-            format_consts_to_str(diff_dict[key])
+        value = diff_dict[key]
+        if isinstance(value, dict):
+            format_consts_to_str(value)
         else:
-            if CONST_DICT.get(diff_dict[key]):
-                diff_dict[key] = CONST_DICT.get(diff_dict[key])
+            if isinstance(value, bool):
+                diff_dict[key] = str(value).lower()
+            if value is None:
+                diff_dict[key] = 'null'
     return diff_dict

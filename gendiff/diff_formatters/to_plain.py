@@ -4,12 +4,12 @@ from gendiff.diff_formatters.stringify_consts import format_consts_to_str
 CONST_LIST = ['true', 'false', 'null']
 
 
-def is_str_not_const(value):
+def is_not_const(value):
     return type(value) is str and value not in CONST_LIST
 
 
 def build_plain_line(key, value, current_path):
-    value = f"'{value}'" if is_str_not_const(value) else value
+    value = f"'{value}'" if is_not_const(value) else value
     value = "[complex value]" if type(value) is dict else value
     if key.startswith('+mod'):
         return f"to {value}\n"
@@ -22,7 +22,7 @@ def build_plain_line(key, value, current_path):
         return f"Property '{path}' was updated. From {value} "
 
 
-def plain(diff):
+def make_plain(diff):
     diff = format_consts_to_str(diff)
 
     def walk(data, keypath):

@@ -12,6 +12,7 @@ def load_file(path_to_file):
     split_extension = path_to_file.split(".")
     file_extension = split_extension[-1]
     if LOADERS.get(file_extension):
-        file = LOADERS.get(file_extension)(open(path_to_file))
-        return file
+        with open(path_to_file, 'r') as file:
+            loaded_file = LOADERS.get(file_extension)(file)
+            return loaded_file
     print(f"'.{file_extension}' is not supported file type")
