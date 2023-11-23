@@ -1,8 +1,9 @@
 from gendiff.gendiff import generate_diff
-from gendiff.diff_formatters import stylish, plain
+from gendiff.diff_formatters import stylish, plain, json_output
+import json
 
 
-def test_gendiff_json_stylish():
+def test_gendiff_json_to_stylish():
     json_file1 = "gendiff/tests/fixtures/file1.json"
     json_file2 = "gendiff/tests/fixtures/file2.json"
     json_file3 = "gendiff/tests/fixtures/file3.json"
@@ -16,7 +17,7 @@ def test_gendiff_json_stylish():
         assert generate_diff(json_file1, json_file3, stylish) == result
 
 
-def test_gendiff_yaml_stylish():
+def test_gendiff_yaml_to_stylish():
     yaml_file1 = "gendiff/tests/fixtures/example1.yaml"
     yaml_file2 = "gendiff/tests/fixtures/example2.yml"
     result1 = "gendiff/tests/fixtures/result1_stylish.txt"
@@ -25,7 +26,7 @@ def test_gendiff_yaml_stylish():
         assert generate_diff(yaml_file1, yaml_file2, stylish) == result
 
 
-def test_gendiff_json_plain():
+def test_gendiff_json_to_plain():
     json_file1 = "gendiff/tests/fixtures/file1.json"
     json_file2 = "gendiff/tests/fixtures/file2.json"
     json_file3 = "gendiff/tests/fixtures/file3.json"
@@ -39,10 +40,18 @@ def test_gendiff_json_plain():
         assert generate_diff(json_file1, json_file3, plain) == result
 
 
-def test_gendiff_yaml_plain():
+def test_gendiff_yaml_to_plain():
     yaml_file1 = "gendiff/tests/fixtures/example1.yaml"
     yaml_file2 = "gendiff/tests/fixtures/example2.yml"
     result1 = "gendiff/tests/fixtures/result1_plain.txt"
     with open(result1, "r") as txt:
         result = txt.read()
         assert generate_diff(yaml_file1, yaml_file2, plain) == result
+
+
+def test_gendiff_json_to_json():
+    json_file1 = "gendiff/tests/fixtures/file1.json"
+    json_file2 = "gendiff/tests/fixtures/file2.json"
+    diff = generate_diff(json_file1, json_file2, json_output)
+    result1 = json.load(open("gendiff/tests/fixtures/result1.json"))
+    assert json.loads(diff) == result1

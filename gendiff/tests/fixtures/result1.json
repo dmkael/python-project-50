@@ -1,0 +1,44 @@
+{
+  "common": {
+    "added >> follow": false,
+    "setting1": "Value 1",
+    "removed >> setting2": 200,
+    "modified from >> setting3": true,
+    "modified to >> setting3": null,
+    "added >> setting4": "blah blah",
+    "added >> setting5": {
+      "key5": "value5"
+    },
+    "setting6": {
+      "doge": {
+        "modified from >> wow": "",
+        "modified to >> wow": "so much"
+      },
+      "key": "value",
+      "added >> ops": "vops"
+    }
+  },
+  "group1": {
+    "modified from >> baz": "bas",
+    "modified to >> baz": "bars",
+    "foo": "bar",
+    "modified from >> nest": {
+      "key": "value"
+    },
+    "modified to >> nest": "str"
+  },
+  "removed >> group2": {
+    "abc": 12345,
+    "deep": {
+      "id": 45
+    }
+  },
+  "added >> group3": {
+    "deep": {
+      "id": {
+        "number": 45
+      }
+    },
+    "fee": 100500
+  }
+}

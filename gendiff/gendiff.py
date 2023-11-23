@@ -1,4 +1,4 @@
-from gendiff.file_loader import load_files
+from gendiff.file_loader import load_file
 
 
 def build_diff(dict1, dict2):
@@ -22,8 +22,8 @@ def build_diff(dict1, dict2):
     return diff
 
 
-def generate_diff(file1, file2, formatter):
-    file1, file2 = load_files(file1, file2)
-    if not file1 and not file2:
-        return None
-    return formatter(build_diff(file1, file2))
+def generate_diff(file1, file2, format_dict):
+    file1 = load_file(file1)
+    file2 = load_file(file2)
+    if file1 and file2:
+        return format_dict(build_diff(file1, file2))
