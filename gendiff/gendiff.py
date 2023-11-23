@@ -22,7 +22,7 @@ def check_inputs(file1, file2, formatter):
         error_message += [formatter]
     if error_message:
         return False, "\n".join(error_message)
-    return True, "Correct"
+    return True, None
 
 
 def build_diff(dict1, dict2):
