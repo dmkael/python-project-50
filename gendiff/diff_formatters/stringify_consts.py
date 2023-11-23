@@ -5,10 +5,10 @@ CONST_DICT = {
 }
 
 
-def format_consts_to_str(diff_dict):
+def make_consts_str(diff_dict):
     for key in diff_dict:
         if isinstance(diff_dict[key], dict):
-            format_consts_to_str(diff_dict[key])
+            make_consts_str(diff_dict[key])
         else:
             if CONST_DICT.get(diff_dict[key]):
                 diff_dict[key] = CONST_DICT.get(diff_dict[key])
