@@ -47,8 +47,8 @@ def build_diff(dict1, dict2):
 
 
 def generate_diff(file1, file2, format_type='stylish'):
-    file1 = load_file(file1)
-    file2 = load_file(file2)
+    file1 = load_file(str(file1))
+    file2 = load_file(str(file2))
     formatter = get_formatter(format_type)
     valid_input, error_message = check_inputs(file1, file2, formatter)
     if valid_input:
