@@ -1,6 +1,6 @@
-from gendiff.diff_formatters.to_stylish import make_stylish
-from gendiff.diff_formatters.to_plain import make_plain
-from gendiff.diff_formatters.to_json import make_json
+from gendiff.diff_formatters import make_stylish
+from gendiff.diff_formatters import make_plain
+from gendiff.diff_formatters import make_json
 
 
 def get_formatter(formatter_name):
@@ -10,4 +10,4 @@ def get_formatter(formatter_name):
         return make_stylish
     if formatter_name == 'json':
         return make_json
-    raise ValueError
+    raise ValueError('Wrong formatter')

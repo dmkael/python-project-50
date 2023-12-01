@@ -2,19 +2,6 @@ from gendiff.file_loader import load_file
 from gendiff.diff_formatters.get_format import get_formatter
 
 
-def check_inputs(file1, file2, formatter):
-    error_message = []
-    if type(file1) is str:
-        error_message += [file1]
-    if type(file2) is str:
-        error_message += [file2]
-    if formatter == "Wrong formatter parameter":
-        error_message += [formatter]
-    if error_message:
-        return False, "\n".join(error_message)
-    return True, None
-
-
 def build_diff(dict1, dict2):
     diff = {}
     sorted_keys = sorted(dict1.keys() | dict2.keys())
@@ -43,7 +30,4 @@ def generate_diff(file1, file2, format_type='stylish'):
     file1 = load_file(str(file1))
     file2 = load_file(str(file2))
     formatter = get_formatter(format_type)
-    valid_input, error_message = check_inputs(file1, file2, formatter)
-    if valid_input:
-        return formatter(build_diff(file1, file2))
-    return error_message
+    return formatter(build_diff(file1, file2))
