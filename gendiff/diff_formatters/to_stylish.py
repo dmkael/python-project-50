@@ -32,7 +32,7 @@ def format_touched_value(data, depth, placer, placer_count, walker_func):
             return line
         case 'modified':
             if isinstance(data['value_new'], dict):
-                value2 = walker_func(data['value_new'])
+                value2 = walker_func(data['value_new'], depth)
             else:
                 value2 = data['value_new']
             line1 = f"{indention}- {data['d_key']}: {value}\n"
