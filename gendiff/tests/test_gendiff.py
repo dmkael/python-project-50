@@ -1,3 +1,5 @@
+import pytest
+
 from gendiff.gendiff import generate_diff
 from pathlib import Path
 import json
@@ -65,5 +67,5 @@ def test_gendiff_json_to_json():
 def test_file_loader_for_other_files():
     file1 = FIXTURES_DIR / "file1.json"
     file2 = FIXTURES_DIR / "file4.doc"
-    diff = generate_diff(file1, file2)
-    assert diff == "'.doc' is not supported file type"
+    with pytest.raises(ValueError):
+        generate_diff(file1, file2)

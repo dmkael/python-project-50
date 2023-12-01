@@ -1,44 +1,86 @@
 {
   "common": {
-    "added >> follow": false,
-    "setting1": "Value 1",
-    "removed >> setting2": 200,
-    "modified from >> setting3": true,
-    "modified to >> setting3": null,
-    "added >> setting4": "blah blah",
-    "added >> setting5": {
-      "key5": "value5"
+    "follow": {
+      "status": "added",
+      "value": false
+    },
+    "setting1": {
+      "status": "same",
+      "value": "Value 1"
+    },
+    "setting2": {
+      "status": "removed",
+      "value": 200
+    },
+    "setting3": {
+      "status": "modified",
+      "value": true,
+      "value_new": null
+    },
+    "setting4": {
+      "status": "added",
+      "value": "blah blah"
+    },
+    "setting5": {
+      "status": "added",
+      "value": {
+        "key5": "value5"
+      }
     },
     "setting6": {
       "doge": {
-        "modified from >> wow": "",
-        "modified to >> wow": "so much"
+        "wow": {
+          "status": "modified",
+          "value": "",
+          "value_new": "so much"
+        }
       },
-      "key": "value",
-      "added >> ops": "vops"
+      "key": {
+        "status": "same",
+        "value": "value"
+      },
+      "ops": {
+        "status": "added",
+        "value": "vops"
+      }
     }
   },
   "group1": {
-    "modified from >> baz": "bas",
-    "modified to >> baz": "bars",
-    "foo": "bar",
-    "modified from >> nest": {
-      "key": "value"
+    "baz": {
+      "status": "modified",
+      "value": "bas",
+      "value_new": "bars"
     },
-    "modified to >> nest": "str"
-  },
-  "removed >> group2": {
-    "abc": 12345,
-    "deep": {
-      "id": 45
+    "foo": {
+      "status": "same",
+      "value": "bar"
+    },
+    "nest": {
+      "status": "modified",
+      "value": {
+        "key": "value"
+      },
+      "value_new": "str"
     }
   },
-  "added >> group3": {
-    "deep": {
-      "id": {
-        "number": 45
+  "group2": {
+    "status": "removed",
+    "value": {
+      "abc": 12345,
+      "deep": {
+        "id": 45
       }
-    },
-    "fee": 100500
+    }
+  },
+  "group3": {
+    "status": "added",
+    "value": {
+      "deep": {
+        "id": {
+          "number": 45
+        }
+      },
+     "fee": 100500
+    }
   }
 }

@@ -1,11 +1,18 @@
 import json
+from gendiff.diff_formatters.value_check import is_touched_value
 
 
 def make_json(diff):
-    result = json.dumps(diff, indent=4)
-    result = result.replace("+add#", 'added >> ')
-    result = result.replace("-rem#", 'removed >> ')
-    result = result.replace("-mod#", 'modified from >> ')
-    result = result.replace("+mod#", 'modified to >> ')
-    result = result.replace("=eql#", '')
-    return result
+
+    def walk(data):
+        result = {}
+        for key in data:
+            value = data.get(key)
+            if is_touched_value(value):
+                value.pop('d_key')
+                result[key] = value
+            else:
+                result[key] = walk(value)
+        return result
+
+    return json.dumps(walk(diff))

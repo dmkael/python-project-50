@@ -1,3 +1,5 @@
-def is_touched_key(key):
-    mod_keys = ['=eql#', '+add#', '-rem#', '-mod#', '+mod#']
-    return any(key.startswith(x) for x in mod_keys)
+def is_touched_value(value):
+    if isinstance(value, dict):
+        if value.get('status'):
+            return True
+    return False

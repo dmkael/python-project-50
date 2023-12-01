@@ -1,15 +1,5 @@
 from gendiff.file_loader import load_file
-from gendiff.diff_formatters import make_stylish, make_plain, make_json
-
-
-def get_formatter(user_input):
-    if user_input == 'plain':
-        return make_plain
-    if user_input == 'stylish':
-        return make_stylish
-    if user_input == 'json':
-        return make_json
-    return "Wrong formatter parameter"
+from gendiff.diff_formatters.get_format import get_formatter
 
 
 def check_inputs(file1, file2, formatter):
@@ -33,16 +23,19 @@ def build_diff(dict1, dict2):
         value2 = dict2.get(key)
         if isinstance(value1, dict) and isinstance(value2, dict):
             diff[key] = build_diff(value1, value2)
+        elif key not in dict2:
+            diff[key] = {"status": "removed", "d_key": key, "value": value1}
+        elif key not in dict1:
+            diff[key] = {"status": "added", "d_key": key, "value": value2}
+        elif value1 == dict2.get(key):
+            diff[key] = {"status": "same", "d_key": key, "value": value1}
         else:
-            if key not in dict2:
-                diff[f"-rem#{key}"] = value1
-            elif key not in dict1:
-                diff[f"+add#{key}"] = value2
-            elif value1 == dict2.get(key):
-                diff[f"=eql#{key}"] = value1
-            else:
-                diff[f"-mod#{key}"] = value1
-                diff[f"+mod#{key}"] = value2
+            diff[key] = {
+                "status": "modified",
+                "d_key": key,
+                "value": value1,
+                "value_new": value2
+            }
     return diff
 
 
