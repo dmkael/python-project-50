@@ -16,6 +16,7 @@ def format_values_stylish(data_dict):
 def format_touched_value(data, depth, placer, placer_count, walker_func):
     current_state = data.get('status')
     indention = placer * (placer_count * depth - 2)
+    result = None
     if isinstance(data['value'], dict):
         value = walker_func(data['value'], depth)
     else:
@@ -23,13 +24,13 @@ def format_touched_value(data, depth, placer, placer_count, walker_func):
     match current_state:
         case 'added':
             line = f"{indention}+ {data['d_key']}: {value}"
-            return line
+            result = line
         case 'removed':
             line = f"{indention}- {data['d_key']}: {value}"
-            return line
+            result = line
         case 'same':
             line = f"{indention}  {data['d_key']}: {value}"
-            return line
+            result = line
         case 'modified':
             if isinstance(data['value_new'], dict):
                 value2 = walker_func(data['value_new'], depth)
@@ -37,7 +38,8 @@ def format_touched_value(data, depth, placer, placer_count, walker_func):
                 value2 = data['value_new']
             line1 = f"{indention}- {data['d_key']}: {value}\n"
             line2 = f"{indention}+ {data['d_key']}: {value2}"
-            return line1 + line2
+            result = line1 + line2
+    return result
 
 
 def make_stylish(data, placer=" ", placer_count=4):

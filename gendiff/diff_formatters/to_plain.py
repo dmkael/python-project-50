@@ -17,14 +17,17 @@ def build_plain_line(value, current_path):
     current_state = value.get('status')
     path = ".".join(current_path)
     value1 = format_value_plain(value.get('value'))
+    result = None
     match current_state:
         case "added":
-            return f"Property '{path}' was added with value: {value1}"
+            result = f"Property '{path}' was added with value: {value1}"
         case "removed":
-            return f"Property '{path}' was removed"
+            result = f"Property '{path}' was removed"
         case "modified":
             value2 = format_value_plain(value.get('value_new'))
-            return f"Property '{path}' was updated. From {value1} to {value2}"
+            result = f"Property '{path}' was updated. From {value1} to {value2}"
+    return result
+
 
 
 def make_plain(diff):
