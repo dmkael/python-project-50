@@ -29,7 +29,6 @@ def build_plain_line(value, current_path):
     return result
 
 
-
 def make_plain(diff):
 
     def walk(data, keypath):
