@@ -3,14 +3,16 @@ from gendiff.diff_formatters.value_check import is_touched_value
 
 def format_value_plain(value):
     if isinstance(value, dict):
-        return '[complex value]'
-    if isinstance(value, bool):
-        return str(value).lower()
-    if isinstance(value, (int, float)):
-        return value
-    if value is None:
-        return 'null'
-    return f"'{value}'"
+        result = '[complex value]'
+    elif isinstance(value, bool):
+        result = str(value).lower()
+    elif isinstance(value, (int, float)):
+        result = value
+    elif value is None:
+        result = 'null'
+    else:
+        result = f"'{value}'"
+    return result
 
 
 def build_plain_line(value, current_path):
