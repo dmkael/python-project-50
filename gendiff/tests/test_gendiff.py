@@ -43,6 +43,7 @@ test_cases_errors = [
     ((json1, json2, 'something'), 'Wrong formatter')
 ]
 
+
 @pytest.mark.parametrize("files, expected", test_cases_stylish)
 def test_gendiff_stylish(files, expected):
     with open(expected, 'r') as result:
