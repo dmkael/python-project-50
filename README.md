@@ -64,7 +64,13 @@ To install the package:
   
 To uninstall the package run the command: 
 
-```python3 -m pip uninstall hexlet-code```
+- __Linux users__:
+
+    ```python3 -m pip uninstall hexlet-code```
+
+- __Windows users__:
+
+    ```py -m pip uninstall hexlet-code```
 
 </details>
 
