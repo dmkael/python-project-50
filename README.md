@@ -18,7 +18,9 @@ To use another output additionally type option key **-f** or **--format** and **
 
 <details>
   <summary>System requirements</summary>
-Python 3.10 or above
+  
+- Python 3.10 or above
+- GIT
 
 </details>
 
