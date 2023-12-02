@@ -16,11 +16,11 @@ def format_value_plain(value):
 
 
 def build_plain_line(value, current_path):
-    current_state = value.get('status')
+    current_status = value.get('status')
     path = ".".join(current_path)
     value1 = format_value_plain(value.get('value'))
     line = None
-    match current_state:
+    match current_status:
         case "added":
             line = f"Property '{path}' was added with value: {value1}"
         case "removed":

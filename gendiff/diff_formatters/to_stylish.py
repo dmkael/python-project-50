@@ -14,14 +14,14 @@ def format_values_stylish(data_dict):
 
 
 def format_touched_value(data, depth, placer, placer_count, walker_func):
-    current_state = data.get('status')
+    current_status = data.get('status')
     indention = placer * (placer_count * depth - 2)
     line = None
     if isinstance(data['value'], dict):
         value = walker_func(data['value'], depth)
     else:
         value = data['value']
-    match current_state:
+    match current_status:
         case 'added':
             line = f"{indention}+ {data['d_key']}: {value}"
         case 'removed':
