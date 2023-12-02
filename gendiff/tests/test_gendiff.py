@@ -21,13 +21,17 @@ result_json1 = FIXTURES_DIR / "result1.json"
 test_cases_stylish = [
     ((json1, json2), result_stylish1),
     ((json1, json3), result_stylish2),
-    ((yaml1, yaml2), result_stylish1)
+    ((yaml1, yaml2), result_stylish1),
+    ((json1, yaml2), result_stylish1),
+    ((yaml1, json2), result_stylish1)
 ]
 
 test_cases_plain = [
     ((json1, json2), result_plain1),
     ((json1, json3), result_plain2),
-    ((yaml1, yaml2), result_plain1)
+    ((yaml1, yaml2), result_plain1),
+    ((json1, yaml2), result_plain1),
+    ((yaml1, json2), result_plain1)
 ]
 
 test_cases_json = [
