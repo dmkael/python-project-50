@@ -36,11 +36,19 @@ To install the package:
   - for system (runs on built-in python):
 
       ```python3 -m pip install git+https://github.com/dmkael/python-project-50.git```
+    
 
 - __Windows users__:
+  - for current user:
+
+      ```py -m pip install --user git+https://github.com/dmkael/python-project-50.git```
+      
   - for system:
 
       ```py -m pip install git+https://github.com/dmkael/python-project-50.git```
+
+  _NOTE: If the __gendiff__ command are not available in your shell after installation __for user__, you’ll need to add the directory to your PATH_
+  _[Installing to the user documentation](https://packaging.python.org/en/latest/tutorials/installing-packages/#installing-to-the-user-site)_
 
 </details>
 
