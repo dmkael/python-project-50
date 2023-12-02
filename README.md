@@ -18,4 +18,8 @@ To install the package run the command:
 ```python3 -m pip install --user git+https://github.com/dmkael/python-project-50.git```
 
 </details>
+
+<details>
+  <summary>Demonstration</summary>
 [![asciicast](https://asciinema.org/a/NyXwtY0BGPYeO4huIabb3mMpN.svg)](https://asciinema.org/a/NyXwtY0BGPYeO4huIabb3mMpN)
+</details>
