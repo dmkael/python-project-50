@@ -1,7 +1,7 @@
 from gendiff.gendiff import generate_diff
 from pathlib import Path
-import json
 import pytest
+import json
 
 
 FIXTURES_DIR = Path(__file__).parent / "fixtures"
@@ -18,20 +18,17 @@ result_plain2 = FIXTURES_DIR / "result2_plain.txt"
 result_json1 = FIXTURES_DIR / "result1.json"
 
 
-test_cases_stylish = [
-    ((json1, json2), result_stylish1),
-    ((json1, json3), result_stylish2),
-    ((yaml1, yaml2), result_stylish1),
-    ((json1, yaml2), result_stylish1),
-    ((yaml1, json2), result_stylish1)
-]
-
-test_cases_plain = [
-    ((json1, json2), result_plain1),
-    ((json1, json3), result_plain2),
-    ((yaml1, yaml2), result_plain1),
-    ((json1, yaml2), result_plain1),
-    ((yaml1, json2), result_plain1)
+test_cases_stylish_plain = [
+    ((json1, json2, 'stylish'), result_stylish1),
+    ((json1, json3, 'stylish'), result_stylish2),
+    ((yaml1, yaml2, 'stylish'), result_stylish1),
+    ((json1, yaml2, 'stylish'), result_stylish1),
+    ((yaml1, json2, 'stylish'), result_stylish1),
+    ((json1, json2, 'plain'), result_plain1),
+    ((json1, json3, 'plain'), result_plain2),
+    ((yaml1, yaml2, 'plain'), result_plain1),
+    ((json1, yaml2, 'plain'), result_plain1),
+    ((yaml1, json2, 'plain'), result_plain1),
 ]
 
 test_cases_json = [
@@ -44,16 +41,10 @@ test_cases_errors = [
 ]
 
 
-@pytest.mark.parametrize("files, expected", test_cases_stylish)
-def test_gendiff_stylish(files, expected):
+@pytest.mark.parametrize("parameters, expected", test_cases_stylish_plain)
+def test_gendiff_stylish_plain(parameters, expected):
     with open(expected, 'r') as result:
-        assert generate_diff(*files) == result.read()
-
-
-@pytest.mark.parametrize("files, expected", test_cases_plain)
-def test_gendiff_plain(files, expected):
-    with open(expected, 'r') as result:
-        assert generate_diff(*files, "plain") == result.read()
+        assert generate_diff(*parameters) == result.read()
 
 
 @pytest.mark.parametrize("files, expected", test_cases_json)
