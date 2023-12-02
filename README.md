@@ -7,7 +7,7 @@
 ##### (Course project 2)
 
 A small tool to define the difference between 2 files.
-Supported input file types: .json, .yaml, .yml
+Supported input file types: #.json, .yaml, .yml.
 Supported output format options: stylish, plain, json.
 The default output format is 'stylish' but you can define another output with the optional key '-f / --format'
 
