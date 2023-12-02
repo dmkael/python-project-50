@@ -31,21 +31,29 @@ To install the package:
 - __Linux__:
   - for current user:
 
-      ```python3 -m pip install --user git+https://github.com/dmkael/python-project-50.git```
+      ```
+    python3 -m pip install --user git+https://github.com/dmkael/python-project-50.git
+      ```
 
   - for system (runs on built-in python):
 
-      ```python3 -m pip install git+https://github.com/dmkael/python-project-50.git```
+      ```
+    python3 -m pip install git+https://github.com/dmkael/python-project-50.git
+      ```
     
 
 - __Windows__:
   - for current user:
 
-      ```py -m pip install --user git+https://github.com/dmkael/python-project-50.git```
+      ```
+    py -m pip install --user git+https://github.com/dmkael/python-project-50.git
+      ```
       
   - for system:
 
-      ```py -m pip install git+https://github.com/dmkael/python-project-50.git```
+      ```
+    py -m pip install git+https://github.com/dmkael/python-project-50.git
+      ```
 
   _NOTE: If the __gendiff__ command are not available in your shell after installation __for user__, you’ll need to add the directory to your PATH. More info here:_
   _[Installing to the user documentation](https://packaging.python.org/en/latest/tutorials/installing-packages/#installing-to-the-user-site)_
@@ -66,11 +74,15 @@ To uninstall the package run the command:
 
 - __Linux__:
 
-    ```python3 -m pip uninstall hexlet-code```
+    ```
+  python3 -m pip uninstall hexlet-code
+    ```
 
 - __Windows__:
 
-    ```py -m pip uninstall hexlet-code```
+    ```
+  py -m pip uninstall hexlet-code
+    ```
 
 </details>
 
