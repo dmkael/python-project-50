@@ -39,6 +39,6 @@ To install the package run the command:
   
 To uninstall the package run the command: 
 
-```python3 -m pip uninstall gendiff-code```
+```python3 -m pip uninstall hexlet-code```
 
 </details>
