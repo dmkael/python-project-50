@@ -38,6 +38,10 @@ test_cases_json = [
     ((json1, json2), result_json1)
 ]
 
+test_cases_errors = [
+    ((json1, doc1), "Unsupported file type"),
+    ((json1, json2, 'something'), 'Wrong formatter')
+]
 
 @pytest.mark.parametrize("files, expected", test_cases_stylish)
 def test_gendiff_stylish(files, expected):
@@ -58,9 +62,8 @@ def test_gendiff_json(files, expected):
         assert json.loads(generate_diff(*files, "json")) == json.loads(result)
 
 
-def test_gendiff_exceptions():
+@pytest.mark.parametrize("parameters, expected", test_cases_errors)
+def test_gendiff_exceptions(parameters, expected):
     with pytest.raises(Exception) as error_message:
-        generate_diff(json1, doc1)
-        assert str(error_message) == 'Unsupported file type'
-        generate_diff(json1, json2, "something")
-        assert str(error_message) == 'Wrong formatter'
+        generate_diff(*parameters)
+        assert str(error_message) == expected
