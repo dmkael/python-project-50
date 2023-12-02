@@ -15,7 +15,7 @@ To use another output additionally type option key <strong>-f</strong> or <stron
 
 <details>
   <summary>System requirements</summary>
-Python 3.9 or above
+Python 3.10 or above
 
 </details>
 
