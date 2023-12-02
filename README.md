@@ -40,7 +40,7 @@ To install the package:
 - __Windows users__:
   - for system:
 
-      ```python -m pip install git+https://github.com/dmkael/python-project-50.git```
+      ```py -m pip install git+https://github.com/dmkael/python-project-50.git```
 
 </details>
 
