@@ -28,7 +28,7 @@ To use another output additionally type option key **-f** or **--format** and **
   <summary>How to install</summary>
 To install the package:
   
-- __Linux users__:
+- __Linux__:
   - for current user:
 
       ```python3 -m pip install --user git+https://github.com/dmkael/python-project-50.git```
@@ -38,7 +38,7 @@ To install the package:
       ```python3 -m pip install git+https://github.com/dmkael/python-project-50.git```
     
 
-- __Windows users__:
+- __Windows__:
   - for current user:
 
       ```py -m pip install --user git+https://github.com/dmkael/python-project-50.git```
@@ -64,11 +64,11 @@ To install the package:
   
 To uninstall the package run the command: 
 
-- __Linux users__:
+- __Linux__:
 
     ```python3 -m pip uninstall hexlet-code```
 
-- __Windows users__:
+- __Windows__:
 
     ```py -m pip uninstall hexlet-code```
 
