@@ -77,7 +77,7 @@ To uninstall the package run the command:
 <details>
   <summary>Miscellaneous</summary>
 
-You can clone the repository and use some make commands defined in Makefile:
+You can clone the repository and use some make commands defined in Makefile (supported by Linux, for Windows need to install a 3rd-party utility):
 1. **make lint** - to run linter
 2. **make test** - to run pytest
 3. **make test-extended** - to run pytest with extended output
