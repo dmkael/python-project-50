@@ -3,32 +3,32 @@ from gendiff.diff_formatters.value_check import is_touched_value
 
 def format_value_plain(value):
     if isinstance(value, dict):
-        result = '[complex value]'
+        formatted_value = '[complex value]'
     elif isinstance(value, bool):
-        result = str(value).lower()
+        formatted_value = str(value).lower()
     elif isinstance(value, (int, float)):
-        result = value
+        formatted_value = value
     elif value is None:
-        result = 'null'
+        formatted_value = 'null'
     else:
-        result = f"'{value}'"
-    return result
+        formatted_value = f"'{value}'"
+    return formatted_value
 
 
 def build_plain_line(value, current_path):
     current_state = value.get('status')
     path = ".".join(current_path)
     value1 = format_value_plain(value.get('value'))
-    result = None
+    line = None
     match current_state:
         case "added":
-            result = f"Property '{path}' was added with value: {value1}"
+            line = f"Property '{path}' was added with value: {value1}"
         case "removed":
-            result = f"Property '{path}' was removed"
+            line = f"Property '{path}' was removed"
         case "modified":
             value2 = format_value_plain(value.get('value_new'))
-            result = f"Property '{path}' was updated. From {value1} to {value2}"
-    return result
+            line = f"Property '{path}' was updated. From {value1} to {value2}"
+    return line
 
 
 def make_plain(diff):
