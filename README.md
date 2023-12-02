@@ -7,11 +7,11 @@
 ##### (Course project 2)
 
 A small Python tool to define the difference between 2 files and show the difference for the 2nd file relative to the 1st. \
-To use it just type <strong>gendiff <path_to_file_1> <path_to_file_2></strong> and the difference will shown on screen\
+To use it just type <strong>gendiff <path_to_file_1> <path_to_file_2></strong> and the difference will shown on screen.\
 Supported input file types: <strong>.json, .yaml, .yml.</strong>\
 Supported output format options: <strong>stylish, plain, json.</strong>\
-The default output format is <strong>'stylish'</strong> but you can define another output with the optional key <strong>'-f / --format'</strong>\
-To use another format just add option <strong>-f</strong> [or] <strong>--format <output_format_option></strong>
+The default output format is <strong>stylish</strong> but you can define another output with the optional key.\
+To use another output you can type option key <strong>-f</strong> or <strong>--format</strong> and <strong><output_format_option></strong>
 
 <details>
   <summary>System requirements</summary>
