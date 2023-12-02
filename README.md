@@ -4,8 +4,4 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/e305410ffe47028932e3/maintainability)](https://codeclimate.com/github/dmkael/python-project-50/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/e305410ffe47028932e3/test_coverage)](https://codeclimate.com/github/dmkael/python-project-50/test_coverage)
 
-[![asciicast](https://asciinema.org/a/PshOkWehgOr68Vkh3EUrPVh58.svg)](https://asciinema.org/a/PshOkWehgOr68Vkh3EUrPVh58)
-[![asciicast](https://asciinema.org/a/Fl5anMYxcsZxdkeFrXmlnCv6O.svg)](https://asciinema.org/a/Fl5anMYxcsZxdkeFrXmlnCv6O)
-[![asciicast](https://asciinema.org/a/jyqq8q6kX0ps1Bgl60DKtFvzD.svg)](https://asciinema.org/a/jyqq8q6kX0ps1Bgl60DKtFvzD)
-[![asciicast](https://asciinema.org/a/CqtkTNv97aTkCSp1LGl7BqA93.svg)](https://asciinema.org/a/CqtkTNv97aTkCSp1LGl7BqA93)
-[![asciicast](https://asciinema.org/a/1ndmW62SAB6I3dw9CwNZBiZ4T.svg)](https://asciinema.org/a/1ndmW62SAB6I3dw9CwNZBiZ4T)
+[![asciicast](https://asciinema.org/a/lj9DRQI1cY2JwSjsJDHWUtUGy.svg)](https://asciinema.org/a/lj9DRQI1cY2JwSjsJDHWUtUGy)
