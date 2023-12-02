@@ -42,3 +42,16 @@ To uninstall the package run the command:
 ```python3 -m pip uninstall hexlet-code```
 
 </details>
+
+<details>
+  <summary>Miscellaneous</summary>
+
+You can use some make commands defined in Makefile:
+1. <strong>make lint</strong> - to run linter
+2. <strong>make test</strong> - to run pytest
+3. <strong>make test-extended</strong> - to run pytest with extended output
+4. <strong>make test-coverage-display</strong> - to view test coverage
+
+Read <strong>Makefile</strong> to view more available options
+
+</details>
