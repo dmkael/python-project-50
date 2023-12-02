@@ -24,9 +24,21 @@ Python 3.10 or above
 
 <details>
   <summary>How to install</summary>
-To install the package run the command:
+To install the package:
+  
+- __Linux users__:
+  - for current user:
 
-```python3 -m pip install --user git+https://github.com/dmkael/python-project-50.git```
+      ```python3 -m pip install --user git+https://github.com/dmkael/python-project-50.git```
+
+  - for system (runs on built-in python):
+
+      ```python3 -m pip install git+https://github.com/dmkael/python-project-50.git```
+
+- __Windows users__:
+  - for system:
+
+      ```python -m pip install git+https://github.com/dmkael/python-project-50.git```
 
 </details>
 
