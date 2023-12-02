@@ -11,7 +11,7 @@ To use it just type <strong>gendiff <path_to_file_1> <path_to_file_2></strong> a
 Supported input file types: <strong>.json, .yaml, .yml.</strong>\
 Supported output format options: <strong>stylish, plain, json.</strong>\
 The default output format is <strong>stylish</strong> but you can define supported output with the optional key.\
-To use another output you can type option key <strong>-f</strong> or <strong>--format</strong> and <strong><output_format_option></strong>
+To use another output additionally type option key <strong>-f</strong> or <strong>--format</strong> and <strong><output_format_option></strong>
 
 <details>
   <summary>System requirements</summary>
