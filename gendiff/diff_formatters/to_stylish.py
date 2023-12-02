@@ -13,7 +13,7 @@ def format_values_stylish(data_dict):
     return data_dict
 
 
-def format_touched_value(data, depth, placer, placer_count, walker_func):
+def make_stylish_line(data, depth, placer, placer_count, walker_func):
     current_status = data.get('status')
     indention = placer * (placer_count * depth - 2)
     line = None
@@ -51,14 +51,15 @@ def make_stylish(data, placer=" ", placer_count=4):
             if is_touched_value(current_value[key]):
                 touched_value = current_value[key]
                 result.append(
-                    format_touched_value(
+                    make_stylish_line(
                         touched_value, depth, placer, placer_count, walk
                     )
                 )
             else:
                 str_key = f"{placer * placer_count * depth}{key}"
                 str_value = f"{walk(current_value[key], depth)}"
-                result.append(f"{str_key}: {str_value}")
+                line = f"{str_key}: {str_value}"
+                result.append(line)
         result.append(f"{placer * placer_count * (depth - 1)}" + "}")
         return '\n'.join(result)
 

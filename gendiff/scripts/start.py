@@ -1,8 +1,13 @@
 import argparse
 from gendiff.gendiff import generate_diff
+import sys
 
 
 def main():
+    # Вся информация обратной трассировки подавляется.
+    # Выводятся только тип и значение исключения.
+    # Закомментируйте sys.tracebacklimit, чтобы отключить подавление.
+    sys.tracebacklimit = 0
     parser = argparse.ArgumentParser(
         description="Compares two configuration files and shows a difference."
     )

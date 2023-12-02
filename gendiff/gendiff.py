@@ -1,4 +1,4 @@
-from gendiff.file_loader import load_file
+from gendiff.file_loader import read_local_file
 from gendiff.diff_formatters.get_format import get_formatter
 
 
@@ -27,7 +27,7 @@ def build_diff(dict1, dict2):
 
 
 def generate_diff(file1, file2, format_type='stylish'):
-    file1 = load_file(str(file1))
-    file2 = load_file(str(file2))
+    file1 = read_local_file(file1)
+    file2 = read_local_file(file2)
     formatter = get_formatter(format_type)
     return formatter(build_diff(file1, file2))

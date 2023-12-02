@@ -15,7 +15,7 @@ def format_value_plain(value):
     return formatted_value
 
 
-def build_plain_line(value, current_path):
+def make_plain_line(value, current_path):
     current_status = value.get('status')
     path = ".".join(current_path)
     value1 = format_value_plain(value.get('value'))
@@ -38,7 +38,7 @@ def make_plain(diff):
         for key in data:
             value = data.get(key)
             if is_touched_value(value):
-                str_line = build_plain_line(value, (keypath + [key]))
+                str_line = make_plain_line(value, (keypath + [key]))
                 if str_line:
                     result.append(str_line)
             else:
