@@ -9,11 +9,12 @@ def main():
     # Закомментируйте sys.tracebacklimit, чтобы отключить подавление.
     sys.tracebacklimit = 0
     parser = argparse.ArgumentParser(
-        description="Compares two configuration files and shows a difference."
+        description="Compares two configuration files and shows a difference in the second file compared to the first."
     )
-    parser.add_argument("first_file")
-    parser.add_argument("second_file")
-    parser.add_argument('-f', '--format', default='stylish')
+    parser.add_argument("<filepath1>", help='path to the first file')
+    parser.add_argument("<filepath2>", help='path to the second file')
+    parser.add_argument('-f', '--format', default='stylish', help='output format (default: "stylish")')
+    parser.add_argument('-v', '--version', action='version', version='%(prog)s ' + '0.1.0')
     args = parser.parse_args()
     diff = generate_diff(args.first_file, args.second_file, args.format)
     if diff:
