@@ -1,5 +1,5 @@
 from gendiff.file_loader import read_local_file
-from gendiff.diff_formatters.get_format import get_formatter
+from gendiff.diff_formatters import get_formatter
 
 
 def build_diff(dict1, dict2):
