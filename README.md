@@ -9,7 +9,7 @@
 ### Generate difference
 ##### (Course project 2)
 
-A small Python tool to define the difference between 2 files and show the difference for the 2nd file relative to the 1st. \
+A small Python tool to define the difference between 2 files and show the difference for the 2nd file relative to the 1st.
 To use it just type **gendiff <path_to_file_1> <path_to_file_2>** and the difference will shown on screen.\
 Supported input file types: **.json, .yaml, .yml.**\
 Supported output format options: **stylish, plain, json.**\
