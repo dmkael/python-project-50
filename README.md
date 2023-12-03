@@ -20,8 +20,8 @@ Option key **-h** or **--help** to view help info.
 <details>
   <summary>System requirements</summary>
   
-- Python 3.10 or above
-- GIT
+- Python 3.10 or above ([download page](https://www.python.org/downloads/))
+- GIT Client ([download page](https://git-scm.com/downloads))
 
 </details>
 
