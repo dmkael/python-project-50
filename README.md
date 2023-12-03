@@ -14,7 +14,8 @@ To use it just type **gendiff <path_to_file_1> <path_to_file_2>** and the differ
 Supported input file types: **.json, .yaml, .yml.**\
 Supported output format options: **stylish, plain, json.**\
 The default output format is **stylish** but you can define supported output with the optional key.\
-To use another output additionally type option key **-f** or **--format** and **<output_format_option>**
+To use another output additionally type option key **-f** or **--format** and **<output_format_option>**\
+Option key **-h** or **--help** to view help info.
 
 <details>
   <summary>System requirements</summary>
