@@ -32,7 +32,7 @@ test_cases_stylish_plain = [
 ]
 
 test_cases_json = [
-    ((json1, json2), result_json1)
+    ((json1, json2, 'json'), result_json1)
 ]
 
 test_cases_errors = [
@@ -47,11 +47,11 @@ def test_gendiff_stylish_plain(parameters, expected):
         assert generate_diff(*parameters) == result.read()
 
 
-@pytest.mark.parametrize("files, expected", test_cases_json)
-def test_gendiff_json(files, expected):
+@pytest.mark.parametrize("parameters, expected", test_cases_json)
+def test_gendiff_json(parameters, expected):
     with open(expected, 'r') as data:
         result = data.read()
-        assert json.loads(generate_diff(*files, "json")) == json.loads(result)
+        assert json.loads(generate_diff(*parameters)) == json.loads(result)
 
 
 @pytest.mark.parametrize("parameters, expected", test_cases_errors)
