@@ -14,7 +14,7 @@ def build_diff(dict1, dict2):
             diff[key] = {"status": "removed", "d_key": key, "value": value1}
         elif key not in dict1:
             diff[key] = {"status": "added", "d_key": key, "value": value2}
-        elif value1 == dict2.get(key):
+        elif value1 == value2:
             diff[key] = {"status": "same", "d_key": key, "value": value1}
         else:
             diff[key] = {
