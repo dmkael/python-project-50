@@ -2,13 +2,12 @@ from gendiff.diff_formatters.value_check import is_touched_value
 
 
 def format_values_stylish(data_dict):
-    for key in data_dict:
-        value = data_dict[key]
+    for key, value in data_dict.items():
         if isinstance(value, dict):
             format_values_stylish(value)
-        if isinstance(value, bool):
+        elif isinstance(value, bool):
             data_dict[key] = str(value).lower()
-        if value is None:
+        elif value is None:
             data_dict[key] = 'null'
     return data_dict
 
