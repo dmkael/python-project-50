@@ -22,8 +22,9 @@
       "value": "blah blah"
     },
     "setting5": {
-      "diff_value_status": "added",
-      "value": {
+      "diff_value_status": "modified",
+      "value": "bike",
+      "to_value": {
         "key5": "value5"
       }
     },

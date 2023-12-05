@@ -6,6 +6,7 @@
       - setting3: true
       + setting3: null
       + setting4: blah blah
+      - setting5: bike
       + setting5: {
             key5: value5
         }
