@@ -1,5 +1,6 @@
 import json
-from gendiff.diff_formatters.value_check import is_touched_value
+from .value_check import is_touched_value
+from .unique_keygen import UNIQUE_KEY
 
 
 def prebuild_clean_diff(data):
@@ -8,6 +9,7 @@ def prebuild_clean_diff(data):
         value = data.get(key)
         if is_touched_value(value):
             value.pop('d_key')
+            value['diff_value_status'] = value.pop(UNIQUE_KEY)
             result[key] = value
         else:
             result[key] = prebuild_clean_diff(value)

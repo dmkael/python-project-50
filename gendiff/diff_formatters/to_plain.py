@@ -1,4 +1,5 @@
-from gendiff.diff_formatters.value_check import is_touched_value
+from .value_check import is_touched_value
+from .unique_keygen import UNIQUE_KEY
 
 
 def format_value_plain(value):
@@ -16,7 +17,7 @@ def format_value_plain(value):
 
 
 def make_plain_line(value, current_path):
-    current_status = value.get('status')
+    current_status = value.get(UNIQUE_KEY)
     path = ".".join(current_path)
     value1 = format_value_plain(value.get('value'))
     line = None
@@ -26,7 +27,7 @@ def make_plain_line(value, current_path):
         case "removed":
             line = f"Property '{path}' was removed"
         case "modified":
-            value2 = format_value_plain(value.get('value_new'))
+            value2 = format_value_plain(value.get('to_value'))
             line = f"Property '{path}' was updated. From {value1} to {value2}"
     return line
 

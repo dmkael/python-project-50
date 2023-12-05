@@ -1,4 +1,5 @@
-from gendiff.diff_formatters.value_check import is_touched_value
+from .value_check import is_touched_value
+from .unique_keygen import UNIQUE_KEY
 
 
 def format_values_stylish(data_dict):
@@ -13,7 +14,7 @@ def format_values_stylish(data_dict):
 
 
 def make_stylish_line(data, depth, indention, walker_func):
-    current_status = data.get('status')
+    current_status = data.get(UNIQUE_KEY)
     line = None
     if isinstance(data['value'], dict):
         value = walker_func(data['value'], depth)
@@ -27,10 +28,10 @@ def make_stylish_line(data, depth, indention, walker_func):
         case 'same':
             line = f"{indention}  {data['d_key']}: {value}"
         case 'modified':
-            if isinstance(data['value_new'], dict):
-                value2 = walker_func(data['value_new'], depth)
+            if isinstance(data['to_value'], dict):
+                value2 = walker_func(data['to_value'], depth)
             else:
-                value2 = data['value_new']
+                value2 = data['to_value']
             line1 = f"{indention}- {data['d_key']}: {value}\n"
             line2 = f"{indention}+ {data['d_key']}: {value2}"
             line = line1 + line2

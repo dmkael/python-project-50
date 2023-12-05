@@ -1,28 +1,28 @@
 {
   "common": {
     "follow": {
-      "status": "added",
+      "diff_value_status": "added",
       "value": false
     },
     "setting1": {
-      "status": "same",
+      "diff_value_status": "same",
       "value": "Value 1"
     },
     "setting2": {
-      "status": "removed",
+      "diff_value_status": "removed",
       "value": 200
     },
     "setting3": {
-      "status": "modified",
+      "diff_value_status": "modified",
       "value": true,
-      "value_new": null
+      "to_value": null
     },
     "setting4": {
-      "status": "added",
+      "diff_value_status": "added",
       "value": "blah blah"
     },
     "setting5": {
-      "status": "added",
+      "diff_value_status": "added",
       "value": {
         "key5": "value5"
       }
@@ -30,41 +30,41 @@
     "setting6": {
       "doge": {
         "wow": {
-          "status": "modified",
+          "diff_value_status": "modified",
           "value": "",
-          "value_new": "so much"
+          "to_value": "so much"
         }
       },
       "key": {
-        "status": "same",
+        "diff_value_status": "same",
         "value": "value"
       },
       "ops": {
-        "status": "added",
+        "diff_value_status": "added",
         "value": "vops"
       }
     }
   },
   "group1": {
     "baz": {
-      "status": "modified",
+      "diff_value_status": "modified",
       "value": "bas",
-      "value_new": "bars"
+      "to_value": "bars"
     },
     "foo": {
-      "status": "same",
+      "diff_value_status": "same",
       "value": "bar"
     },
     "nest": {
-      "status": "modified",
+      "diff_value_status": "modified",
       "value": {
         "key": "value"
       },
-      "value_new": "str"
+      "to_value": "str"
     }
   },
   "group2": {
-    "status": "removed",
+    "diff_value_status": "removed",
     "value": {
       "abc": 12345,
       "deep": {
@@ -73,7 +73,7 @@
     }
   },
   "group3": {
-    "status": "added",
+    "diff_value_status": "added",
     "value": {
       "deep": {
         "id": {

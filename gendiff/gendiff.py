@@ -1,5 +1,6 @@
 from gendiff.file_loader import read_local_file
 from gendiff.diff_formatters import get_formatter
+from gendiff.diff_formatters import UNIQUE_KEY
 
 
 def build_diff(dict1, dict2):
@@ -11,17 +12,17 @@ def build_diff(dict1, dict2):
         if isinstance(value1, dict) and isinstance(value2, dict):
             diff[key] = build_diff(value1, value2)
         elif key not in dict2:
-            diff[key] = {"status": "removed", "d_key": key, "value": value1}
+            diff[key] = {UNIQUE_KEY: "removed", "d_key": key, "value": value1}
         elif key not in dict1:
-            diff[key] = {"status": "added", "d_key": key, "value": value2}
+            diff[key] = {UNIQUE_KEY: "added", "d_key": key, "value": value2}
         elif value1 == value2:
-            diff[key] = {"status": "same", "d_key": key, "value": value1}
+            diff[key] = {UNIQUE_KEY: "same", "d_key": key, "value": value1}
         else:
             diff[key] = {
-                "status": "modified",
+                UNIQUE_KEY: "modified",
                 "d_key": key,
                 "value": value1,
-                "value_new": value2
+                "to_value": value2
             }
     return diff
 
