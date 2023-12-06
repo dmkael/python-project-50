@@ -1,6 +1,6 @@
-from gendiff.diff_formatters import make_stylish
-from gendiff.diff_formatters import make_plain
-from gendiff.diff_formatters import make_json
+from .to_stylish import make_stylish
+from .to_plain import make_plain
+from .to_json import make_json
 
 
 def get_formatter(formatter_name):

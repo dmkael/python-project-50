@@ -10,17 +10,19 @@ def build_diff(dict1, dict2):
         value1 = dict1.get(key)
         value2 = dict2.get(key)
         if isinstance(value1, dict) and isinstance(value2, dict):
-            diff[key] = build_diff(value1, value2)
+            diff[key] = {
+                UNIQUE_KEY: "nested",
+                "value": build_diff(value1, value2)
+            }
         elif key not in dict2:
-            diff[key] = {UNIQUE_KEY: "removed", "d_key": key, "value": value1}
+            diff[key] = {UNIQUE_KEY: "removed", "value": value1}
         elif key not in dict1:
-            diff[key] = {UNIQUE_KEY: "added", "d_key": key, "value": value2}
+            diff[key] = {UNIQUE_KEY: "added", "value": value2}
         elif value1 == value2:
-            diff[key] = {UNIQUE_KEY: "same", "d_key": key, "value": value1}
+            diff[key] = {UNIQUE_KEY: "same", "value": value1}
         else:
             diff[key] = {
                 UNIQUE_KEY: "modified",
-                "d_key": key,
                 "value": value1,
                 "to_value": value2
             }

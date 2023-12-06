@@ -1,4 +1,3 @@
-from .value_check import is_touched_value
 from .unique_keygen import UNIQUE_KEY
 
 
@@ -16,12 +15,11 @@ def format_value_plain(value):
     return formatted_value
 
 
-def make_plain_line(value, current_path):
-    current_status = value.get(UNIQUE_KEY)
+def make_plain_line(value, current_path, status):
     path = ".".join(current_path)
     value1 = format_value_plain(value.get('value'))
     line = None
-    match current_status:
+    match status:
         case "added":
             line = f"Property '{path}' was added with value: {value1}"
         case "removed":
@@ -36,14 +34,14 @@ def make_plain(diff):
 
     def walk(data, keypath):
         result = []
-        for key in data:
-            value = data.get(key)
-            if is_touched_value(value):
-                str_line = make_plain_line(value, (keypath + [key]))
+        for key, inner_value in data.items():
+            status = inner_value.get(UNIQUE_KEY)
+            if status == "nested":
+                result.append(walk(inner_value.get('value'), keypath + [key]))
+            elif status:
+                str_line = make_plain_line(inner_value, keypath + [key], status)
                 if str_line:
                     result.append(str_line)
-            else:
-                result.append(walk(value, (keypath + [key])))
         return "\n".join(result)
 
     return walk(diff, [])

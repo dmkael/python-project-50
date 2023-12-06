@@ -4,10 +4,7 @@
       "diff_value_status": "added",
       "value": false
     },
-    "setting1": {
-      "diff_value_status": "same",
-      "value": "Value 1"
-    },
+    "setting1": "Value 1",
     "setting2": {
       "diff_value_status": "removed",
       "value": 200
@@ -36,10 +33,7 @@
           "to_value": "so much"
         }
       },
-      "key": {
-        "diff_value_status": "same",
-        "value": "value"
-      },
+      "key": "value",
       "ops": {
         "diff_value_status": "added",
         "value": "vops"
@@ -52,10 +46,7 @@
       "value": "bas",
       "to_value": "bars"
     },
-    "foo": {
-      "diff_value_status": "same",
-      "value": "bar"
-    },
+    "foo": "bar",
     "nest": {
       "diff_value_status": "modified",
       "value": {

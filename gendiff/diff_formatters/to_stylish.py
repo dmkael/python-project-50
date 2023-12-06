@@ -1,66 +1,58 @@
-from .value_check import is_touched_value
 from .unique_keygen import UNIQUE_KEY
 
-
-def format_values_stylish(data_dict):
-    for key, value in data_dict.items():
-        if isinstance(value, dict):
-            format_values_stylish(value)
-        elif isinstance(value, bool):
-            data_dict[key] = str(value).lower()
-        elif value is None:
-            data_dict[key] = 'null'
-    return data_dict
+CONST_TRANSFORM = {
+    "True": 'true',
+    "False": 'false',
+    "None": 'null'
+}
 
 
-def make_stylish_line(data, depth, indention, walker_func):
-    current_status = data.get(UNIQUE_KEY)
-    line = None
-    if isinstance(data['value'], dict):
-        value = walker_func(data['value'], depth)
-    else:
-        value = data['value']
-    match current_status:
-        case 'added':
-            line = f"{indention}+ {data['d_key']}: {value}"
-        case 'removed':
-            line = f"{indention}- {data['d_key']}: {value}"
-        case 'same':
-            line = f"{indention}  {data['d_key']}: {value}"
-        case 'modified':
-            if isinstance(data['to_value'], dict):
-                value2 = walker_func(data['to_value'], depth)
-            else:
-                value2 = data['to_value']
-            line1 = f"{indention}- {data['d_key']}: {value}\n"
-            line2 = f"{indention}+ {data['d_key']}: {value2}"
-            line = line1 + line2
-    return line
+def stringify_const(value):
+    value = CONST_TRANSFORM.get(str(value), value)
+    return value
 
 
-def make_stylish(data, placer=" ", placer_count=4):
-    data = format_values_stylish(data)
-
-    def walk(current_value, depth):
-        if not isinstance(current_value, dict):
-            return str(current_value)
+def stylize_dict(value, depth, placer):
+    if isinstance(value, dict):
         result = ["{"]
-        depth += 1
-        for key in current_value:
-            if is_touched_value(current_value[key]):
-                touched_value = current_value[key]
-                indention = placer * (placer_count * depth - 2)
-                result.append(
-                    make_stylish_line(
-                        touched_value, depth, indention, walk
-                    )
-                )
-            else:
-                str_key = f"{placer * placer_count * depth}{key}"
-                str_value = f"{walk(current_value[key], depth)}"
-                line = f"{str_key}: {str_value}"
-                result.append(line)
-        result.append(f"{placer * placer_count * (depth - 1)}" + "}")
-        return '\n'.join(result)
+        for key, inner_value in value.items():
+            inner_value = stylize_dict(inner_value, depth + 1, placer)
+            result.append(f"{placer * (depth + 1)}{key}: {inner_value}")
+        result.append(f"{placer * depth}" + "}")
+        return "\n".join(result)
+    value = stringify_const(value)
+    return value
 
-    return walk(data, 0)
+
+def build_stylish(diff, depth, placer=" ", placer_count=4):
+    depth = depth + 1
+    normal_placer = placer * placer_count
+    mod_placer = placer * (placer_count * depth - 2)
+    result = ["{"]
+    for key in diff:
+        value = diff[key]["value"]
+        status = diff[key][UNIQUE_KEY]
+        if status != "nested":
+            value = stylize_dict(value, depth, normal_placer)
+        match status:
+            case "nested":
+                result.append(f"{normal_placer * depth}{key}: "
+                              + build_stylish(value, depth))
+            case "added":
+                result.append(f"{mod_placer}+ {key}: {value}")
+            case "removed":
+                result.append(f"{mod_placer}- {key}: {value}")
+            case "same":
+                result.append(f"{mod_placer}  {key}: {value}")
+            case "modified":
+                value2 = diff[key]["to_value"]
+                value2 = stylize_dict(value2, depth, normal_placer)
+                result.append(f"{mod_placer}- {key}: {value}")
+                result.append(f"{mod_placer}+ {key}: {value2}")
+    close_placer = normal_placer * (depth - 1)
+    result.append(f"{close_placer}" + "}")
+    return "\n".join(result)
+
+
+def make_stylish(data):
+    return build_stylish(data, 0)
