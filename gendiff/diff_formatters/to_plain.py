@@ -25,7 +25,7 @@ def make_plain_line(value, current_path, status):
         case "removed":
             line = f"Property '{path}' was removed"
         case "modified":
-            value2 = format_value_plain(value.get('to_value'))
+            value2 = format_value_plain(value.get('new_value'))
             line = f"Property '{path}' was updated. From {value1} to {value2}"
     return line
 

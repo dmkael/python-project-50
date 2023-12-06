@@ -12,7 +12,7 @@
     "setting3": {
       "diff_value_status": "modified",
       "value": true,
-      "to_value": null
+      "new_value": null
     },
     "setting4": {
       "diff_value_status": "added",
@@ -21,7 +21,7 @@
     "setting5": {
       "diff_value_status": "modified",
       "value": "bike",
-      "to_value": {
+      "new_value": {
         "key5": "value5"
       }
     },
@@ -30,7 +30,7 @@
         "wow": {
           "diff_value_status": "modified",
           "value": "",
-          "to_value": "so much"
+          "new_value": "so much"
         }
       },
       "key": "value",
@@ -44,7 +44,7 @@
     "baz": {
       "diff_value_status": "modified",
       "value": "bas",
-      "to_value": "bars"
+      "new_value": "bars"
     },
     "foo": "bar",
     "nest": {
@@ -52,7 +52,7 @@
       "value": {
         "key": "value"
       },
-      "to_value": "str"
+      "new_value": "str"
     }
   },
   "group2": {

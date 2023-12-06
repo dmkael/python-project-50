@@ -24,7 +24,7 @@ def build_diff(dict1, dict2):
             diff[key] = {
                 UNIQUE_KEY: "modified",
                 "value": value1,
-                "to_value": value2
+                "new_value": value2
             }
     return diff
 
