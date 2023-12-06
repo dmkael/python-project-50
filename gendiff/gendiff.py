@@ -21,7 +21,8 @@ def build_diff(dict1, dict2):
     for key in sorted_keys:
         value1 = dict1.get(key, UNIQUE_KEY)
         value2 = dict2.get(key, UNIQUE_KEY)
-        if isinstance(value1, dict) and isinstance(value2, dict):
+        is_two_dicts = isinstance(value1, dict) and isinstance(value2, dict)
+        if is_two_dicts:
             diff[key] = {
                 UNIQUE_KEY: "nested",
                 "value": build_diff(value1, value2)
