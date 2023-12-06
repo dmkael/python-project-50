@@ -18,7 +18,6 @@ result_plain1 = FIXTURES_DIR / "result1_plain.txt"
 result_plain2 = FIXTURES_DIR / "result2_plain.txt"
 result_json1 = FIXTURES_DIR / "result1.json"
 
-
 test_cases_raw = [
     ((json1, json2, 'stylish'), result_stylish1),
     ((json1, json3, 'stylish'), result_stylish2),
@@ -33,7 +32,10 @@ test_cases_raw = [
 ]
 
 test_cases_files = [
-    ((json1, json2, 'json'), result_json1)
+    ((json1, json2, 'json'), json.loads, result_json1),
+    ((yaml1, yaml2, 'json'), json.loads, result_json1),
+    ((json1, yaml2, 'json'), json.loads, result_json1),
+    ((yaml1, json2, 'json'), json.loads, result_json1)
 ]
 
 test_cases_errors = [
@@ -44,16 +46,16 @@ test_cases_errors = [
 
 
 @pytest.mark.parametrize("parameters, expected", test_cases_raw)
-def test_gendiff(parameters, expected):
+def test_gendiff_raw_data(parameters, expected):
     with open(expected, 'r') as result:
         assert generate_diff(*parameters) == result.read()
 
 
-@pytest.mark.parametrize("parameters, expected", test_cases_files)
-def test_gendiff_json(parameters, expected):
+@pytest.mark.parametrize("parameters, loader, expected", test_cases_files)
+def test_gendiff_file_data(parameters, loader, expected):
     with open(expected, 'r') as data:
-        result = data.read()
-        assert json.loads(generate_diff(*parameters)) == json.loads(result)
+        file = data.read()
+        assert loader(generate_diff(*parameters)) == loader(file)
 
 
 @pytest.mark.parametrize("parameters, expected", test_cases_errors)
