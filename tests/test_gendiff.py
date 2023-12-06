@@ -8,6 +8,7 @@ FIXTURES_DIR = Path(__file__).parent / "fixtures"
 json1 = FIXTURES_DIR / "file1.json"
 json2 = FIXTURES_DIR / "file2.json"
 json3 = FIXTURES_DIR / "file3.json"
+json4 = FIXTURES_DIR / "file4.json"
 yaml1 = FIXTURES_DIR / "example1.yaml"
 yaml2 = FIXTURES_DIR / "example2.yml"
 doc1 = FIXTURES_DIR / "file4.doc"
@@ -18,7 +19,7 @@ result_plain2 = FIXTURES_DIR / "result2_plain.txt"
 result_json1 = FIXTURES_DIR / "result1.json"
 
 
-test_cases_stylish_plain = [
+test_cases_raw = [
     ((json1, json2, 'stylish'), result_stylish1),
     ((json1, json3, 'stylish'), result_stylish2),
     ((yaml1, yaml2, 'stylish'), result_stylish1),
@@ -28,26 +29,27 @@ test_cases_stylish_plain = [
     ((json1, json3, 'plain'), result_plain2),
     ((yaml1, yaml2, 'plain'), result_plain1),
     ((json1, yaml2, 'plain'), result_plain1),
-    ((yaml1, json2, 'plain'), result_plain1),
+    ((yaml1, json2, 'plain'), result_plain1)
 ]
 
-test_cases_json = [
+test_cases_files = [
     ((json1, json2, 'json'), result_json1)
 ]
 
 test_cases_errors = [
     ((json1, doc1), "Unsupported file type"),
-    ((json1, json2, 'something'), 'Wrong formatter')
+    ((json1, json2, 'something'), 'Wrong formatter'),
+    ((json1, json4), "Wrong data in file")
 ]
 
 
-@pytest.mark.parametrize("parameters, expected", test_cases_stylish_plain)
-def test_gendiff_stylish_plain(parameters, expected):
+@pytest.mark.parametrize("parameters, expected", test_cases_raw)
+def test_gendiff(parameters, expected):
     with open(expected, 'r') as result:
         assert generate_diff(*parameters) == result.read()
 
 
-@pytest.mark.parametrize("parameters, expected", test_cases_json)
+@pytest.mark.parametrize("parameters, expected", test_cases_files)
 def test_gendiff_json(parameters, expected):
     with open(expected, 'r') as data:
         result = data.read()

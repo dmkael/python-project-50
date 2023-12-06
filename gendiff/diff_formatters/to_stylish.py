@@ -29,9 +29,9 @@ def stylize_diff(diff, depth, placer=" ", placer_count=4):
     normal_placer = placer * placer_count
     mod_placer = placer * (placer_count * depth - 2)
     result = ["{"]
-    for key in diff:
-        inner_value = diff[key]["value"]
-        status = diff[key][UNIQUE_KEY]
+    for key, diff_value in diff.items():
+        inner_value = diff_value["value"]
+        status = diff_value[UNIQUE_KEY]
         if status != "nested":
             inner_value = finalize_value(inner_value, depth, normal_placer)
         match status:
@@ -45,7 +45,7 @@ def stylize_diff(diff, depth, placer=" ", placer_count=4):
             case "same":
                 result.append(f"{mod_placer}  {key}: {inner_value}")
             case "modified":
-                inner_value2 = diff[key]["new_value"]
+                inner_value2 = diff_value["new_value"]
                 inner_value2 = finalize_value(
                     inner_value2, depth, normal_placer
                 )
