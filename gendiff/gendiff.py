@@ -3,10 +3,8 @@ from gendiff.diff_formatters import get_formatter
 from gendiff.diff_formatters import UNIQUE_KEY
 
 
-def build_diff_value(value1, value2, func):
-    if isinstance(value1, dict) and isinstance(value2, dict):
-        result = {UNIQUE_KEY: "nested", "value": func(value1, value2)}
-    elif value1 == value2:
+def build_diff_value(value1, value2):
+    if value1 == value2:
         result = {UNIQUE_KEY: "same", "value": value1}
     elif value1 == UNIQUE_KEY:
         result = {UNIQUE_KEY: "added", "value": value2}
@@ -23,7 +21,10 @@ def build_diff(dict1, dict2):
     for key in sorted_keys:
         value1 = dict1.get(key, UNIQUE_KEY)
         value2 = dict2.get(key, UNIQUE_KEY)
-        diff[key] = build_diff_value(value1, value2, build_diff)
+        if isinstance(value1, dict) and isinstance(value2, dict):
+            diff[key] = {UNIQUE_KEY: "nested", "value": build_diff(value1, value2)}
+        else:
+            diff[key] = build_diff_value(value1, value2)
     return diff
 
 
