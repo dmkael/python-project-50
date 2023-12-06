@@ -1,78 +1,99 @@
 {
   "common": {
-    "follow": {
-      "diff_value_status": "added",
-      "value": false
-    },
-    "setting1": "Value 1",
-    "setting2": {
-      "diff_value_status": "removed",
-      "value": 200
-    },
-    "setting3": {
-      "diff_value_status": "modified",
-      "value": true,
-      "new_value": null
-    },
-    "setting4": {
-      "diff_value_status": "added",
-      "value": "blah blah"
-    },
-    "setting5": {
-      "diff_value_status": "modified",
-      "value": "bike",
-      "new_value": {
-        "key5": "value5"
-      }
-    },
-    "setting6": {
-      "doge": {
-        "wow": {
-          "diff_value_status": "modified",
-          "value": "",
-          "new_value": "so much"
-        }
+    "value": {
+      "follow": {
+        "value": false,
+        "diff_value_status": "added"
       },
-      "key": "value",
-      "ops": {
-        "diff_value_status": "added",
-        "value": "vops"
+      "setting1": {
+        "value": "Value 1",
+        "diff_value_status": "same"
+      },
+      "setting2": {
+        "value": 200,
+        "diff_value_status": "removed"
+      },
+      "setting3": {
+        "value": true,
+        "new_value": null,
+        "diff_value_status": "modified"
+      },
+      "setting4": {
+        "value": "blah blah",
+        "diff_value_status": "added"
+      },
+      "setting5": {
+        "value": "bike",
+        "new_value": {
+          "key5": "value5"
+        },
+        "diff_value_status":"modified"
+      },
+      "setting6": {
+        "value": {
+          "doge": {
+            "value": {
+              "wow": {
+                "value": "",
+                "new_value":"so much",
+                "diff_value_status": "modified"
+              }
+            },
+            "diff_value_status": "nested"
+          },
+          "key": {
+            "value": "value",
+            "diff_value_status": "same"
+          },
+          "ops": {
+            "value": "vops",
+            "diff_value_status": "added"
+          }
+        },
+        "diff_value_status": "nested"
       }
-    }
+    },
+    "diff_value_status": "nested"
   },
   "group1": {
-    "baz": {
-      "diff_value_status": "modified",
-      "value": "bas",
-      "new_value": "bars"
-    },
-    "foo": "bar",
-    "nest": {
-      "diff_value_status": "modified",
-      "value": {
-        "key": "value"
+    "value": {
+      "baz": {
+        "value": "bas",
+        "new_value": "bars",
+        "diff_value_status": "modified"
       },
-      "new_value": "str"
-    }
+      "foo": {
+        "value": "bar",
+        "diff_value_status": "same"
+      },
+      "nest": {
+        "value": {
+          "key": "value"
+        },
+        "new_value": "str",
+        "diff_value_status": "modified"
+      }
+    },
+    "diff_value_status": "nested"
   },
   "group2": {
-    "diff_value_status": "removed",
     "value": {
       "abc": 12345,
       "deep": {
         "id": 45
       }
-    }
+    },
+    "diff_value_status": "removed"
   },
   "group3": {
-    "diff_value_status": "added",
     "value": {
       "deep": {
         "id": {
           "number": 45
         }
       },
-     "fee": 100500
-    }
+      "fee": 100500
+    },
+    "diff_value_status": "added"
   }
 }

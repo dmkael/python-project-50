@@ -3,14 +3,12 @@ from .unique_keygen import UNIQUE_KEY
 
 
 def build_clean_diff(data):
-    for key, inner_value in data.items():
-        if isinstance(inner_value, dict):
-            build_clean_diff(inner_value)
-            status = inner_value.get(UNIQUE_KEY)
-            if status:
-                inner_value['diff_value_status'] = inner_value.pop(UNIQUE_KEY)
-            if status == 'same' or status == 'nested':
-                data[key] = inner_value.get('value')
+    if not isinstance(data, dict):
+        return data
+    if data.get(UNIQUE_KEY):
+        data['diff_value_status'] = data.pop(UNIQUE_KEY)
+    for key in data:
+        build_clean_diff(data[key])
     return data
 
 
