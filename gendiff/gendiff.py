@@ -15,9 +15,13 @@ def build_diff_value(value1, value2):
     return result
 
 
+def sort_keys(dict1, dict2):
+    return sorted(set(dict1 | dict2))
+
+
 def build_diff(dict1, dict2):
     diff = {}
-    sorted_keys = sorted(set(dict1 | dict2))
+    sorted_keys = sort_keys(dict1, dict2)
     for key in sorted_keys:
         value1 = dict1.get(key, UNIQUE_KEY)
         value2 = dict2.get(key, UNIQUE_KEY)
