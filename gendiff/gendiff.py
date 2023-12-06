@@ -22,7 +22,10 @@ def build_diff(dict1, dict2):
         value1 = dict1.get(key, UNIQUE_KEY)
         value2 = dict2.get(key, UNIQUE_KEY)
         if isinstance(value1, dict) and isinstance(value2, dict):
-            diff[key] = {UNIQUE_KEY: "nested", "value": build_diff(value1, value2)}
+            diff[key] = {
+                UNIQUE_KEY: "nested",
+                "value": build_diff(value1, value2)
+            }
         else:
             diff[key] = build_diff_value(value1, value2)
     return diff
