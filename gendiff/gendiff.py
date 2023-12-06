@@ -5,7 +5,7 @@ from gendiff.diff_formatters import UNIQUE_KEY
 
 def build_diff(dict1, dict2):
     diff = {}
-    sorted_keys = sorted(dict1.keys() | dict2.keys())
+    sorted_keys = sorted(set(dict1 | dict2))
     for key in sorted_keys:
         value1 = dict1.get(key)
         value2 = dict2.get(key)

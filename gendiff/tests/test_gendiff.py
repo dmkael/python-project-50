@@ -58,4 +58,4 @@ def test_gendiff_json(parameters, expected):
 def test_gendiff_exceptions(parameters, expected):
     with pytest.raises(Exception) as error_message:
         generate_diff(*parameters)
-        assert str(error_message) == expected
+    assert str(error_message.value) == expected
