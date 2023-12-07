@@ -14,8 +14,6 @@ def load_data(file_data, extension):
     if not loader:
         raise ValueError('Unsupported file type')
     loaded_data = loader(file_data)
-    if not isinstance(loaded_data, dict):
-        raise ValueError("Wrong data in file")
     return loaded_data
 
 
