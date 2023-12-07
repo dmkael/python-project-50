@@ -7,53 +7,50 @@ CONST_TRANSFORM_PATTERN = {
 }
 
 
-def transform_const(value):
-    value = CONST_TRANSFORM_PATTERN.get(str(value), value)
-    return value
-
-
-def finalize_value(value, depth, placer):
+def finalize_value(value, depth, indent):
     if not isinstance(value, dict):
-        value = transform_const(value)
+        value = CONST_TRANSFORM_PATTERN.get(str(value), value)
         return value
-    result = ["{"]
+    stringed_value = ["{"]
     for key, inner_value in value.items():
-        inner_value = finalize_value(inner_value, depth + 1, placer)
-        result.append(f"{placer * (depth + 1)}{key}: {inner_value}")
-    result.append(f"{placer * depth}" + "}")
-    return "\n".join(result)
+        inner_value = finalize_value(inner_value, depth + 1, indent)
+        stringed_value.append(f"{indent * (depth + 1)}{key}: {inner_value}")
+    stringed_value.append(f"{indent * depth}" + "}")
+    return "\n".join(stringed_value)
 
 
-def stylize_diff(diff, depth, placer=" ", placer_count=4):
-    depth = depth + 1
-    normal_placer = placer * placer_count
-    mod_placer = placer * (placer_count * depth - 2)
-    result = ["{"]
+def stylize_diff(diff, depth, indent=" ", indent_count=4):
+    current_depth = depth + 1
+    normal_indent = indent * indent_count
+    style_indent = indent * (indent_count * current_depth - 2)
+    closing_indent = normal_indent * (current_depth - 1)
+    style_parts = ["{"]
     for key, diff_value in diff.items():
         inner_value = diff_value["value"]
         status = diff_value[UNIQUE_KEY]
         if status != "nested":
-            inner_value = finalize_value(inner_value, depth, normal_placer)
+            inner_value = finalize_value(
+                inner_value, current_depth, normal_indent
+            )
         match status:
             case "nested":
-                result.append(f"{normal_placer * depth}{key}: "
-                              + stylize_diff(inner_value, depth))
+                style_parts.append(f"{normal_indent * current_depth}{key}: "
+                                   + stylize_diff(inner_value, current_depth))
             case "added":
-                result.append(f"{mod_placer}+ {key}: {inner_value}")
+                style_parts.append(f"{style_indent}+ {key}: {inner_value}")
             case "removed":
-                result.append(f"{mod_placer}- {key}: {inner_value}")
+                style_parts.append(f"{style_indent}- {key}: {inner_value}")
             case "same":
-                result.append(f"{mod_placer}  {key}: {inner_value}")
+                style_parts.append(f"{style_indent}  {key}: {inner_value}")
             case "modified":
                 inner_value2 = diff_value["new_value"]
                 inner_value2 = finalize_value(
-                    inner_value2, depth, normal_placer
+                    inner_value2, current_depth, normal_indent
                 )
-                result.append(f"{mod_placer}- {key}: {inner_value}")
-                result.append(f"{mod_placer}+ {key}: {inner_value2}")
-    close_placer = normal_placer * (depth - 1)
-    result.append(f"{close_placer}" + "}")
-    return "\n".join(result)
+                style_parts.append(f"{style_indent}- {key}: {inner_value}")
+                style_parts.append(f"{style_indent}+ {key}: {inner_value2}")
+    style_parts.append(f"{closing_indent}" + "}")
+    return "\n".join(style_parts)
 
 
 def make_stylish(data):
