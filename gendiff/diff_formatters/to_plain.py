@@ -36,7 +36,7 @@ def make_plain(diff):
     def walk(data, keypath):
         result = []
         for key, inner_value in data.items():
-            status = inner_value.get("status_key")
+            status = inner_value.get("value_status")
             value = make_plain_line(inner_value, keypath + [key], status, walk)
             if value:
                 result.append(value)
