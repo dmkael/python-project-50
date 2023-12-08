@@ -39,7 +39,9 @@ test_cases_raw = [
 test_cases_errors = [
     ((json1, doc1), "Unsupported file type"),
     ((json1, json2, 'something'), 'Wrong formatter'),
-    ((json1, json4), 'conflict key "value_status" is in files')
+    ((json1, json4), f'STATUS_KEY conflict. '
+                     f'Key "value_status" in files matches STATUS_KEY. '
+                     f'Change STATUS_KEY value.')
 ]
 
 

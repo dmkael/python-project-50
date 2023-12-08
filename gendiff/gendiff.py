@@ -1,22 +1,23 @@
 from gendiff.file_loader import read_local_file
 from gendiff.diff_formatters import get_formatter
+from gendiff.diff_formatters import STATUS_KEY
 
 
 def build_diff_value(value1, value2, walker):
     if isinstance(value1, dict) and isinstance(value2, dict):
         value = {
-            "value_status": "nested",
+            STATUS_KEY: "nested",
             "value": walker(value1, value2)
         }
     elif value1 == value2:
-        value = {"value_status": "same", "value": value1}
+        value = {STATUS_KEY: "same", "value": value1}
     elif value1 == "N/A_dict1_value":
-        value = {"value_status": "added", "value": value2}
+        value = {STATUS_KEY: "added", "value": value2}
     elif value2 == "N/A_dict2_value":
-        value = {"value_status": "removed", "value": value1}
+        value = {STATUS_KEY: "removed", "value": value1}
     else:
         value = {
-            "value_status": "modified",
+            STATUS_KEY: "modified",
             "value": value1,
             "new_value": value2
         }
@@ -27,8 +28,10 @@ def build_diff(dict1, dict2):
     diff = {}
     sorted_keys = sorted(set(dict1 | dict2))
     for key in sorted_keys:
-        if key == "value_status":
-            raise ValueError('conflict key "value_status" is in files')
+        if key == STATUS_KEY:
+            raise ValueError(f'STATUS_KEY conflict. '
+                             f'Key "{STATUS_KEY}" in files matches STATUS_KEY. '
+                             f'Change STATUS_KEY value.')
         value1 = dict1.get(key, "N/A_dict1_value")
         value2 = dict2.get(key, "N/A_dict2_value")
         diff[key] = build_diff_value(value1, value2, build_diff)

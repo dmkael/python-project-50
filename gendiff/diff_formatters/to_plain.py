@@ -1,3 +1,6 @@
+from .status_key import STATUS_KEY
+
+
 def format_value_plain(value):
     if isinstance(value, dict):
         formatted_value = '[complex value]'
@@ -36,7 +39,7 @@ def make_plain(diff):
     def walk(data, keypath):
         result = []
         for key, inner_value in data.items():
-            status = inner_value.get("value_status")
+            status = inner_value.get(STATUS_KEY)
             value = make_plain_line(inner_value, keypath + [key], status, walk)
             if value:
                 result.append(value)

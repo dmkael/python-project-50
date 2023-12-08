@@ -1,3 +1,6 @@
+from .status_key import STATUS_KEY
+
+
 CONST_TRANSFORM_PATTERN = {
     "True": 'true',
     "False": 'false',
@@ -26,7 +29,7 @@ def stylize_diff(diff, depth, indent=" ", indent_count=4):
     style_parts = ["{"]
     for key, diff_value in diff.items():
         inner_value = diff_value["value"]
-        status = diff_value["value_status"]
+        status = diff_value[STATUS_KEY]
         if status != "nested":
             inner_value = finalize_value(
                 inner_value, current_depth, normal_indent
