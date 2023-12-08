@@ -1,5 +1,5 @@
 {
-  "value_status": "hexlet.ru",
+  "value_status": {"value_status": "hexlet.ru"},
   "timeout": 0,
   "proxy": "123.234.53.22",
   "follow": true,
