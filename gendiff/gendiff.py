@@ -28,7 +28,7 @@ def build_diff(dict1, dict2):
     sorted_keys = sorted(set(dict1 | dict2))
     for key in sorted_keys:
         if key == "value_status":
-            raise ValueError('key "value_status" is in files')
+            raise ValueError('conflict key "value_status" is in files')
         value1 = dict1.get(key, "N/A_dict1_value")
         value2 = dict2.get(key, "N/A_dict2_value")
         diff[key] = build_diff_value(value1, value2, build_diff)

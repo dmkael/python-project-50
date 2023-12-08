@@ -1,7 +1,7 @@
-from gendiff.diff_formatters.to_plain import make_plain
-from gendiff.diff_formatters.to_stylish import make_stylish
-from gendiff.diff_formatters.to_json import make_json
-from gendiff.diff_formatters.get_format import get_formatter
+from .to_plain import make_plain
+from .to_stylish import make_stylish
+from .to_json import make_json
+from .get_format import get_formatter
 
 
 __all__ = (
