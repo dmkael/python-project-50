@@ -7,6 +7,7 @@ FIXTURES_DIR = Path(__file__).parent / "fixtures"
 json1 = FIXTURES_DIR / "file1.json"
 json2 = FIXTURES_DIR / "file2.json"
 json3 = FIXTURES_DIR / "file3.json"
+json4 = FIXTURES_DIR / "file4.json"
 yaml1 = FIXTURES_DIR / "example1.yaml"
 yaml2 = FIXTURES_DIR / "example2.yml"
 doc1 = FIXTURES_DIR / "file4.doc"
@@ -37,7 +38,8 @@ test_cases_raw = [
 
 test_cases_errors = [
     ((json1, doc1), "Unsupported file type"),
-    ((json1, json2, 'something'), 'Wrong formatter')
+    ((json1, json2, 'something'), 'Wrong formatter'),
+    ((json1, json4), 'key "satus_key" is in files')
 ]
 
 
