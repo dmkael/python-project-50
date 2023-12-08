@@ -1,5 +1,3 @@
-from .unique_keygen import UNIQUE_KEY
-
 CONST_TRANSFORM_PATTERN = {
     "True": 'true',
     "False": 'false',
@@ -9,7 +7,8 @@ CONST_TRANSFORM_PATTERN = {
 
 def finalize_value(value, depth, indent):
     if not isinstance(value, dict):
-        value = CONST_TRANSFORM_PATTERN.get(str(value), value)
+        if not isinstance(value, str):
+            value = CONST_TRANSFORM_PATTERN.get(str(value), value)
         return value
     stringed_value = ["{"]
     for key, inner_value in value.items():
@@ -27,7 +26,7 @@ def stylize_diff(diff, depth, indent=" ", indent_count=4):
     style_parts = ["{"]
     for key, diff_value in diff.items():
         inner_value = diff_value["value"]
-        status = diff_value[UNIQUE_KEY]
+        status = diff_value["status_key"]
         if status != "nested":
             inner_value = finalize_value(
                 inner_value, current_depth, normal_indent

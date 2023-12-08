@@ -1,33 +1,37 @@
 from gendiff.file_loader import read_local_file
 from gendiff.diff_formatters import get_formatter
-from gendiff.diff_formatters import UNIQUE_KEY
 
 
-def build_diff_value(value1, value2):
-    if value1 == value2:
-        result = {UNIQUE_KEY: "same", "value": value1}
-    elif value1 == UNIQUE_KEY:
-        result = {UNIQUE_KEY: "added", "value": value2}
-    elif value2 == UNIQUE_KEY:
-        result = {UNIQUE_KEY: "removed", "value": value1}
+def build_diff_value(value1, value2, walker):
+    if isinstance(value1, dict) and isinstance(value2, dict):
+        value = {
+            "status_key": "nested",
+            "value": walker(value1, value2)
+        }
+    elif value1 == value2:
+        value = {"status_key": "same", "value": value1}
+    elif value1 == "N/A_dict1_value":
+        value = {"status_key": "added", "value": value2}
+    elif value2 == "N/A_dict2_value":
+        value = {"status_key": "removed", "value": value1}
     else:
-        result = {UNIQUE_KEY: "modified", "value": value1, "new_value": value2}
-    return result
+        value = {
+            "status_key": "modified",
+            "value": value1,
+            "new_value": value2
+        }
+    return value
 
 
 def build_diff(dict1, dict2):
     diff = {}
     sorted_keys = sorted(set(dict1 | dict2))
     for key in sorted_keys:
-        value1 = dict1.get(key, UNIQUE_KEY)
-        value2 = dict2.get(key, UNIQUE_KEY)
-        if isinstance(value1, dict) and isinstance(value2, dict):
-            diff[key] = {
-                UNIQUE_KEY: "nested",
-                "value": build_diff(value1, value2)
-            }
-        else:
-            diff[key] = build_diff_value(value1, value2)
+        if key == "status_key":
+            raise ValueError('key "satus_key" is in files')
+        value1 = dict1.get(key, "N/A_dict1_value")
+        value2 = dict2.get(key, "N/A_dict2_value")
+        diff[key] = build_diff_value(value1, value2, build_diff)
     return diff
 
 

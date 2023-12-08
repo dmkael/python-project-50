@@ -1,12 +1,11 @@
 import json
-from .unique_keygen import UNIQUE_KEY
 
 
 def build_clean_diff(data):
     if not isinstance(data, dict):
         return data
-    if data.get(UNIQUE_KEY):
-        data['diff_value_status'] = data.pop(UNIQUE_KEY)
+    if data.get("status_key"):
+        data['diff_value_status'] = data.pop("status_key")
     for key in data:
         build_clean_diff(data[key])
     return data
