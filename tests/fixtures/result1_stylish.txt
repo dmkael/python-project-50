@@ -18,6 +18,12 @@
             key: value
           + ops: vops
         }
+      - test1: 0
+      + test1: False
+      - test2: True
+      + test2: true
+      - test3: null
+      + test3: 0
     }
     group1: {
       - baz: bas

@@ -2,6 +2,10 @@ from gendiff.file_loader import read_local_file
 from gendiff.diff_formatters import get_formatter
 
 
+def lock_value():
+    pass
+
+
 def build_diff_value(value1, value2, walker):
     if isinstance(value1, dict) and isinstance(value2, dict):
         value = {
@@ -10,9 +14,9 @@ def build_diff_value(value1, value2, walker):
         }
     elif value1 == value2:
         value = {"value_status": "same", "value": value1}
-    elif value1 == "N/A_dict1_value":
+    elif value1 is lock_value:
         value = {"value_status": "added", "value": value2}
-    elif value2 == "N/A_dict2_value":
+    elif value2 is lock_value:
         value = {"value_status": "removed", "value": value1}
     else:
         value = {
@@ -27,8 +31,8 @@ def build_diff(dict1, dict2):
     diff = {}
     sorted_keys = sorted(set(dict1 | dict2))
     for key in sorted_keys:
-        value1 = dict1.get(key, "N/A_dict1_value")
-        value2 = dict2.get(key, "N/A_dict2_value")
+        value1 = dict1.get(key, lock_value)
+        value2 = dict2.get(key, lock_value)
         diff[key] = build_diff_value(value1, value2, build_diff)
     return diff
 
