@@ -2,7 +2,7 @@ from gendiff.file_loader import read_local_file
 from gendiff.diff_formatters import get_formatter
 
 
-def lock_value():
+def fallback():
     pass
 
 
@@ -14,9 +14,9 @@ def build_diff_value(value1, value2, walker):
         }
     elif value1 == value2:
         value = {"value_status": "same", "value": value1}
-    elif value1 is lock_value:
+    elif value1 is fallback:
         value = {"value_status": "added", "value": value2}
-    elif value2 is lock_value:
+    elif value2 is fallback:
         value = {"value_status": "removed", "value": value1}
     else:
         value = {
@@ -31,8 +31,8 @@ def build_diff(dict1, dict2):
     diff = {}
     sorted_keys = sorted(set(dict1 | dict2))
     for key in sorted_keys:
-        value1 = dict1.get(key, lock_value)
-        value2 = dict2.get(key, lock_value)
+        value1 = dict1.get(key, fallback)
+        value2 = dict2.get(key, fallback)
         diff[key] = build_diff_value(value1, value2, build_diff)
     return diff
 
