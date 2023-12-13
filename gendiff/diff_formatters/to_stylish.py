@@ -8,14 +8,12 @@ def finalize_value(value, depth, indent):
             inner_value = finalize_value(inner_value, depth + 1, indent)
             stringed_value.append(f"{indent * (depth + 1)}{key}: {inner_value}")
         stringed_value.append(f"{indent * depth}" + "}")
-        finalized_value = "\n".join(stringed_value)
+        value = "\n".join(stringed_value)
     elif isinstance(value, bool):
-        finalized_value = str(value).lower()
+        value = str(value).lower()
     elif value is None:
-        finalized_value = 'null'
-    else:
-        finalized_value = value
-    return finalized_value
+        value = 'null'
+    return value
 
 
 def stylize_diff(diff, depth, indent=" ", indent_count=4):
