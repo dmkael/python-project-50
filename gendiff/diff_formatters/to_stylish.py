@@ -3,12 +3,12 @@ from .status_validator import is_valid_status
 
 def finalize_value(value, depth, indent):
     if isinstance(value, dict):
-        stringed_value = ["{"]
+        value_parts = ["{"]
         for key, inner_value in value.items():
             inner_value = finalize_value(inner_value, depth + 1, indent)
-            stringed_value.append(f"{indent * (depth + 1)}{key}: {inner_value}")
-        stringed_value.append(f"{indent * depth}" + "}")
-        value = "\n".join(stringed_value)
+            value_parts.append(f"{indent * (depth + 1)}{key}: {inner_value}")
+        value_parts.append(f"{indent * depth}" + "}")
+        value = "\n".join(value_parts)
     elif isinstance(value, bool):
         value = str(value).lower()
     elif value is None:
@@ -28,27 +28,27 @@ def stylize_diff(diff, depth, indent=" ", indent_count=4):
         status = diff_value["value_status"]
         if not is_valid_status(status):
             raise ValueError('Invalid status value')
-        if status == "nested":
-            style_parts.append(f"{normal_indent * current_depth}{key}: "
-                               + stylize_diff(inner_value, current_depth))
-        else:
+        if status != "nested":
             inner_value = finalize_value(
                 inner_value, current_depth, normal_indent
             )
-            match status:
-                case "added":
-                    style_parts.append(f"{style_indent}+ {key}: {inner_value}")
-                case "removed":
-                    style_parts.append(f"{style_indent}- {key}: {inner_value}")
-                case "same":
-                    style_parts.append(f"{style_indent}  {key}: {inner_value}")
-                case "modified":
-                    inner_value2 = diff_value["new_value"]
-                    inner_value2 = finalize_value(
-                        inner_value2, current_depth, normal_indent
-                    )
-                    style_parts.append(f"{style_indent}- {key}: {inner_value}")
-                    style_parts.append(f"{style_indent}+ {key}: {inner_value2}")
+        match status:
+            case "nested":
+                style_parts.append(f"{normal_indent * current_depth}{key}: "
+                                   + stylize_diff(inner_value, current_depth))
+            case "added":
+                style_parts.append(f"{style_indent}+ {key}: {inner_value}")
+            case "removed":
+                style_parts.append(f"{style_indent}- {key}: {inner_value}")
+            case "same":
+                style_parts.append(f"{style_indent}  {key}: {inner_value}")
+            case "modified":
+                inner_value2 = diff_value["new_value"]
+                inner_value2 = finalize_value(
+                    inner_value2, current_depth, normal_indent
+                )
+                style_parts.append(f"{style_indent}- {key}: {inner_value}")
+                style_parts.append(f"{style_indent}+ {key}: {inner_value2}")
 
     style_parts.append(f"{closing_indent}" + "}")
     return "\n".join(style_parts)
