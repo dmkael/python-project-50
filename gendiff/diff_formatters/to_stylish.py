@@ -2,17 +2,18 @@ from .status_validator import is_valid_status
 
 
 def finalize_value(value, depth, indent):
-    if isinstance(value, dict):
-        value_parts = ["{"]
-        for key, inner_value in value.items():
-            inner_value = finalize_value(inner_value, depth + 1, indent)
-            value_parts.append(f"{indent * (depth + 1)}{key}: {inner_value}")
-        value_parts.append(f"{indent * depth}" + "}")
-        value = "\n".join(value_parts)
-    elif isinstance(value, bool):
-        value = str(value).lower()
-    elif value is None:
-        value = 'null'
+    if not isinstance(value, dict):
+        if value is None:
+            value = "null"
+        if isinstance(value, bool):
+            value = str(value).lower()
+        return value
+    value_parts = ["{"]
+    for key, inner_value in value.items():
+        inner_value = finalize_value(inner_value, depth + 1, indent)
+        value_parts.append(f"{indent * (depth + 1)}{key}: {inner_value}")
+    value_parts.append(f"{indent * depth}" + "}")
+    value = "\n".join(value_parts)
     return value
 
 
